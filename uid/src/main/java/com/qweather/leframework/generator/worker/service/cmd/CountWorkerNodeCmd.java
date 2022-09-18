@@ -20,7 +20,7 @@ public class CountWorkerNodeCmd implements Command<Long> {
 
     @Override
     public Long execute(SqlSession sqlSession) {
-        return sqlSession.selectOne("org.le.uid.generator.worker.count", workerNodeQueryImpl);
+        return sqlSession.selectOne("com.qweather.leframework.uid.generator.worker.count", workerNodeQueryImpl);
     }
 
 }

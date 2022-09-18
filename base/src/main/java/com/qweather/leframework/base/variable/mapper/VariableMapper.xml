@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.le.base.variable">
-    <resultMap type="com.qweather.leframework.base.variable.service.po.VariableEntity" extends="org.le.model.baseMap"
+<mapper namespace="com.qweather.leframework.base.variable">
+    <resultMap type="com.qweather.leframework.base.variable.service.po.VariableEntity" extends="com.qweather.leframework.model.baseMap"
                id="variableResultMap">
         <result property="code" column="ITEM_CODE"/>
         <result property="value" column="ITEM_VALUE"/>

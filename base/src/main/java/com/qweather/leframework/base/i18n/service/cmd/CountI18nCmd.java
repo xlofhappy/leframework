@@ -20,7 +20,7 @@ public class CountI18nCmd implements Command<Long> {
 
     @Override
     public Long execute(SqlSession sqlSession) {
-        return sqlSession.selectOne("org.le.base.i18n.count", i18nQueryImpl);
+        return sqlSession.selectOne("com.qweather.leframework.base.i18n.count", i18nQueryImpl);
     }
 
 }

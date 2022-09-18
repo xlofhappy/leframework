@@ -21,7 +21,7 @@ public class GetRoleByIdCmd implements Command<RoleEntity> {
     @Override
     public RoleEntity execute(SqlSession sqlSession) {
         if ( id != null ) {
-            return sqlSession.selectOne("org.le.base.rbac.role.getById", id);
+            return sqlSession.selectOne("com.qweather.leframework.base.rbac.role.getById", id);
         }
         return null;
     }

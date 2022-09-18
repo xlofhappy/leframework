@@ -20,7 +20,7 @@ public class CountUserExtendCmd implements Command<Long> {
 
     @Override
     public Long execute(SqlSession sqlSession) {
-        return sqlSession.selectOne("org.le.base.rbac.user_extend.count", userExtendQueryImpl);
+        return sqlSession.selectOne("com.qweather.leframework.base.rbac.user_extend.count", userExtendQueryImpl);
     }
 
 }

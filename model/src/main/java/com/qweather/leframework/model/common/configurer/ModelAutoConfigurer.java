@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@ConfigurationPropertiesScan("org.le.model.common.properties")
+@ConfigurationPropertiesScan("com.qweather.leframework.model.common.properties")
 public class ModelAutoConfigurer  {
 
 }

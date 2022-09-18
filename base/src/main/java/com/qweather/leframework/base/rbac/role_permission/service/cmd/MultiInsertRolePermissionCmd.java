@@ -23,7 +23,7 @@ public class MultiInsertRolePermissionCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entityList != null && entityList.size() > 0 ) {
-            sqlSession.delete("org.le.base.rbac.role_permission.multiInsert", entityList);
+            sqlSession.delete("com.qweather.leframework.base.rbac.role_permission.multiInsert", entityList);
         }
         return null;
     }

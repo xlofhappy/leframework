@@ -20,7 +20,7 @@ public class CountRoleCmd implements Command<Long> {
 
     @Override
     public Long execute(SqlSession sqlSession) {
-        return sqlSession.selectOne("org.le.base.rbac.role.count", roleQueryImpl);
+        return sqlSession.selectOne("com.qweather.leframework.base.rbac.role.count", roleQueryImpl);
     }
 
 }

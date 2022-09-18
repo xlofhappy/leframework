@@ -33,7 +33,7 @@ public class DeleteUserExtendCmd implements Command<Void> {
             Map map = new HashMap<>(2);
             map.put("uid", uid);
             map.put("k", k);
-            sqlSession.delete("org.le.base.rbac.user_extend.delete", map);
+            sqlSession.delete("com.qweather.leframework.base.rbac.user_extend.delete", map);
         }
         return null;
     }

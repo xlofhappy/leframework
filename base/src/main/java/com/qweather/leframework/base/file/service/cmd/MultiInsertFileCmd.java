@@ -23,7 +23,7 @@ public class MultiInsertFileCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entityList != null && entityList.size() > 0 ) {
-            sqlSession.insert("org.le.base.file.multiInsert", entityList);
+            sqlSession.insert("com.qweather.leframework.base.file.multiInsert", entityList);
         }
         return null;
     }

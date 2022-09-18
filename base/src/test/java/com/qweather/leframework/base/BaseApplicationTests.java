@@ -1,4 +1,4 @@
-package org.le.base;
+package com.qweather.leframework.base;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

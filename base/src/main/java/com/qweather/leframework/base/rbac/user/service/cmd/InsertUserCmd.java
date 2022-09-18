@@ -25,7 +25,7 @@ public class InsertUserCmd implements Command<Void> {
             if ( entity.getId() == null ) {
                 entity.setId(Config.getDaoConfig().getIdPool().getNextId());
             }
-            sqlSession.insert("org.le.base.rbac.user.insert", entity);
+            sqlSession.insert("com.qweather.leframework.base.rbac.user.insert", entity);
         }
         return null;
     }

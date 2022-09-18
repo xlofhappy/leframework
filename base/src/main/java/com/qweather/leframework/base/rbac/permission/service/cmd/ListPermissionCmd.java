@@ -23,7 +23,7 @@ public class ListPermissionCmd implements Command<List<PermissionEntity>> {
 
     @Override
     public List<PermissionEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.rbac.permission.list", permissionQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.rbac.permission.list", permissionQueryImpl);
     }
 
 }

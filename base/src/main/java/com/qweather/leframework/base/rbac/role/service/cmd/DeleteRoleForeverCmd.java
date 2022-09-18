@@ -20,7 +20,7 @@ public class DeleteRoleForeverCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( id != null ) {
-            sqlSession.delete("org.le.base.rbac.role.deleteForever", id);
+            sqlSession.delete("com.qweather.leframework.base.rbac.role.deleteForever", id);
         }
         return null;
     }

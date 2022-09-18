@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.le.base.relationship">
+<mapper namespace="com.qweather.leframework.base.relationship">
     <resultMap type="com.qweather.leframework.base.relationship.service.po.RelationshipEntity" id="relationshipResultMap">
         <result property="sourceId" column="SOURCE_ID"/>
         <result property="type" column="TYPE"/>

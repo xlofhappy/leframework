@@ -23,7 +23,7 @@ public class ListWorkerNodeCmd implements Command<List<WorkerNodeEntity>> {
 
     @Override
     public List<WorkerNodeEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.uid.generator.worker.list", workerNodeQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.uid.generator.worker.list", workerNodeQueryImpl);
     }
 
 }

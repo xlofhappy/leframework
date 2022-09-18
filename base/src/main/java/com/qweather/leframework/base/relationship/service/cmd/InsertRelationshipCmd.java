@@ -21,7 +21,7 @@ public class InsertRelationshipCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entity != null ) {
-            sqlSession.insert("org.le.base.relationship.insert", entity);
+            sqlSession.insert("com.qweather.leframework.base.relationship.insert", entity);
         }
         return null;
     }

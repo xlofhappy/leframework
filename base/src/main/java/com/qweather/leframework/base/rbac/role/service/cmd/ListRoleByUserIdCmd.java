@@ -22,7 +22,7 @@ public class ListRoleByUserIdCmd implements Command<List<RoleEntity>> {
 
     @Override
     public List<RoleEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.rbac.role.getUserRoleList", userId);
+        return sqlSession.selectList("com.qweather.leframework.base.rbac.role.getUserRoleList", userId);
     }
 
 }

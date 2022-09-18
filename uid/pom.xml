@@ -55,9 +55,6 @@
                 <artifactId>maven-source-plugin</artifactId>
                 <configuration>
                     <attach>true</attach>
-                    <excludes>
-                        <exclude>org/le/uid/generator/UidGeneratorApplication.java</exclude>
-                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
@@ -71,9 +68,6 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <excludes>
-                        <exclude>org/le/uid/generator/UidGeneratorApplication.java</exclude>
-                    </excludes>
                     <skip>true</skip>
                 </configuration>
             </plugin>

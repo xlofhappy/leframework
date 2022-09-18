@@ -23,7 +23,7 @@ public class ListI18nCmd implements Command<List<I18nEntity>> {
 
     @Override
     public List<I18nEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.i18n.list", i18nQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.i18n.list", i18nQueryImpl);
     }
 
 }

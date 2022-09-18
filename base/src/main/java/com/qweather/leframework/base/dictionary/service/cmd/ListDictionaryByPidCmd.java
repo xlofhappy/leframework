@@ -22,7 +22,7 @@ public class ListDictionaryByPidCmd implements Command<List<DictionaryEntity>> {
 
     @Override
     public List<DictionaryEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.dictionary.getClosestChildren", pid);
+        return sqlSession.selectList("com.qweather.leframework.base.dictionary.getClosestChildren", pid);
     }
 
 }

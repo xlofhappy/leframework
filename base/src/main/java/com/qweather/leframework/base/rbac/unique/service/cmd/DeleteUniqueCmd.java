@@ -29,7 +29,7 @@ public class DeleteUniqueCmd implements Command<Void> {
             Map<String, String> map = new HashMap<>(2);
             map.put("unionId", unionId);
             map.put("type", type);
-            sqlSession.insert("org.le.base.rbac.unique.delete", map);
+            sqlSession.insert("com.qweather.leframework.base.rbac.unique.delete", map);
         }
         return null;
     }

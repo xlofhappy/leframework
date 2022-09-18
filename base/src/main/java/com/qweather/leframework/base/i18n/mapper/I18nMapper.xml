@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.le.base.i18n">
+<mapper namespace="com.qweather.leframework.base.i18n">
     <resultMap type="com.qweather.leframework.base.i18n.service.po.I18nEntity" id="i18nResultMap">
         <result property="code" column="CODE"/>
         <result property="lang" column="LANG"/>

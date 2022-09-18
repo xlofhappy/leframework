@@ -20,7 +20,7 @@ public class DeleteVariableForeverCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( id != null ) {
-            sqlSession.delete("org.le.base.variable.deleteForever", id);
+            sqlSession.delete("com.qweather.leframework.base.variable.deleteForever", id);
         }
         return null;
     }

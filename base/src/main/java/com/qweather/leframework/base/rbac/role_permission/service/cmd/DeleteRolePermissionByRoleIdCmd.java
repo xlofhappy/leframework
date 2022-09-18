@@ -20,7 +20,7 @@ public class DeleteRolePermissionByRoleIdCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( roleId != null) {
-            sqlSession.delete("org.le.base.rbac.role_permission.deleteByRoleId", roleId);
+            sqlSession.delete("com.qweather.leframework.base.rbac.role_permission.deleteByRoleId", roleId);
         }
         return null;
     }

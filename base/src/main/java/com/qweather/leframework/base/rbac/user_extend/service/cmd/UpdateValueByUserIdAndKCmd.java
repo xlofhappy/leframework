@@ -23,7 +23,7 @@ public class UpdateValueByUserIdAndKCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if (userExtendEntity != null) {
-            sqlSession.update("org.le.base.rbac.user_extend.updateUserExtend", userExtendEntity);
+            sqlSession.update("com.qweather.leframework.base.rbac.user_extend.updateUserExtend", userExtendEntity);
         }
         return null;
     }

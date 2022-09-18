@@ -22,7 +22,7 @@ public class ListClosestRoleByPidCmd implements Command<List<RoleEntity>> {
 
     @Override
     public List<RoleEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.rbac.role.getClosestChildren", pid);
+        return sqlSession.selectList("com.qweather.leframework.base.rbac.role.getClosestChildren", pid);
     }
 
 }

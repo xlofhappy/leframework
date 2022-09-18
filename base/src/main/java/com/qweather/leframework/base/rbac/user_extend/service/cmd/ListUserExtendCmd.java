@@ -23,7 +23,7 @@ public class ListUserExtendCmd implements Command<List<UserExtendEntity>> {
 
     @Override
     public List<UserExtendEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.rbac.user_extend.list", userExtendQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.rbac.user_extend.list", userExtendQueryImpl);
     }
 
 }

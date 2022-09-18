@@ -21,7 +21,7 @@ public class UpdateDictionaryCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entity != null ) {
-            sqlSession.update("org.le.base.dictionary.update", entity);
+            sqlSession.update("com.qweather.leframework.base.dictionary.update", entity);
         }
         return null;
     }

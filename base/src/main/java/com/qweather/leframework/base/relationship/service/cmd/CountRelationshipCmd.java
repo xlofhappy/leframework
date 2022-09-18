@@ -20,7 +20,7 @@ public class CountRelationshipCmd implements Command<Long> {
 
     @Override
     public Long execute(SqlSession sqlSession) {
-        return sqlSession.selectOne("org.le.base.relationship.count", relationshipQuery);
+        return sqlSession.selectOne("com.qweather.leframework.base.relationship.count", relationshipQuery);
     }
 
 }

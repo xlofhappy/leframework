@@ -20,7 +20,7 @@ public class CountVariableCmd implements Command<Long> {
 
     @Override
     public Long execute(SqlSession sqlSession) {
-        return sqlSession.selectOne("org.le.base.variable.count", variableQueryImpl);
+        return sqlSession.selectOne("com.qweather.leframework.base.variable.count", variableQueryImpl);
     }
 
 }

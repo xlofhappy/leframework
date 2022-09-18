@@ -20,7 +20,7 @@ public class CountRoleMutexCmd implements Command<Long> {
 
     @Override
     public Long execute(SqlSession sqlSession) {
-        return sqlSession.selectOne("org.le.base.rbac.role_mutex.count", roleMutexQueryImpl);
+        return sqlSession.selectOne("com.qweather.leframework.base.rbac.role_mutex.count", roleMutexQueryImpl);
     }
 
 }

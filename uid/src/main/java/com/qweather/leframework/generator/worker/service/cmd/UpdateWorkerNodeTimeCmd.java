@@ -28,7 +28,7 @@ public class UpdateWorkerNodeTimeCmd implements Command<Void> {
             Map map = new HashMap<>(2);
             map.put("id", id);
             map.put("time", time);
-            sqlSession.insert("org.le.uid.generator.worker.updateTime", map);
+            sqlSession.insert("com.qweather.leframework.uid.generator.worker.updateTime", map);
         }
         return null;
     }

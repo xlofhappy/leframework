@@ -21,7 +21,7 @@ public class UpdateRoleCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entity != null && entity.getId() != null ) {
-            sqlSession.update("org.le.base.rbac.role.update", entity);
+            sqlSession.update("com.qweather.leframework.base.rbac.role.update", entity);
         }
         return null;
     }

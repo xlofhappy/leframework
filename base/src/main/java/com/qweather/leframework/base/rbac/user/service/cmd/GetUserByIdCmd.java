@@ -21,7 +21,7 @@ public class GetUserByIdCmd implements Command<UserEntity> {
     @Override
     public UserEntity execute(SqlSession sqlSession) {
         if ( id != null ) {
-            return sqlSession.selectOne("org.le.base.rbac.user.getById", id);
+            return sqlSession.selectOne("com.qweather.leframework.base.rbac.user.getById", id);
         }
         return null;
     }

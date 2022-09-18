@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.le.base.rbac.permission">
-    <resultMap type="com.qweather.leframework.base.rbac.permission.service.po.PermissionEntity" extends="org.le.model.baseMap"
+<mapper namespace="com.qweather.leframework.base.rbac.permission">
+    <resultMap type="com.qweather.leframework.base.rbac.permission.service.po.PermissionEntity" extends="com.qweather.leframework.model.baseMap"
                id="permissionResultMap">
         <result property="pid" column="PID"/>
         <result property="code" column="CODE"/>

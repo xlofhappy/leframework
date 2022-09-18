@@ -27,7 +27,7 @@ public class InsertUserRoleCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if (entity != null && entity.getRoleId() != null && entity.getUserId() != null) {
-            sqlSession.delete("org.le.base.rbac.user_role.insert", entity);
+            sqlSession.delete("com.qweather.leframework.base.rbac.user_role.insert", entity);
         }
         return null;
     }

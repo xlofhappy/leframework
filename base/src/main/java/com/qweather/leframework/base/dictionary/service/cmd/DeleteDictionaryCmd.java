@@ -20,7 +20,7 @@ public class DeleteDictionaryCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( id != null ) {
-            sqlSession.update("org.le.base.dictionary.delete", id);
+            sqlSession.update("com.qweather.leframework.base.dictionary.delete", id);
         }
         return null;
     }

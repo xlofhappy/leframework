@@ -20,7 +20,7 @@ public class DeleteUserCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( id != null ) {
-            sqlSession.delete("org.le.base.rbac.user.delete", id);
+            sqlSession.delete("com.qweather.leframework.base.rbac.user.delete", id);
         }
         return null;
     }

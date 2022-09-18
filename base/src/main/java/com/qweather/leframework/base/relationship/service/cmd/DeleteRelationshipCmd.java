@@ -27,7 +27,7 @@ public class DeleteRelationshipCmd extends DeleteRelationshipBySourceIdCmd {
         map.put("sourceId", sourceId);
         map.put("type", type);
         map.put("targetId", targetId);
-        sqlSession.delete("org.le.base.relationship.delete", map);
+        sqlSession.delete("com.qweather.leframework.base.relationship.delete", map);
         return null;
     }
 

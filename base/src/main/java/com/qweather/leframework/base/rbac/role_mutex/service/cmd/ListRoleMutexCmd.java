@@ -23,7 +23,7 @@ public class ListRoleMutexCmd implements Command<List<RoleMutexEntity>> {
 
     @Override
     public List<RoleMutexEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.rbac.role_mutex.list", roleMutexQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.rbac.role_mutex.list", roleMutexQueryImpl);
     }
 
 }

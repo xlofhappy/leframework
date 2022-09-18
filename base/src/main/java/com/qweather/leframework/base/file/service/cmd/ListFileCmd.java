@@ -23,7 +23,7 @@ public class ListFileCmd implements Command<List<FileEntity>> {
 
     @Override
     public List<FileEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.file.list", fileQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.file.list", fileQueryImpl);
     }
 
 }

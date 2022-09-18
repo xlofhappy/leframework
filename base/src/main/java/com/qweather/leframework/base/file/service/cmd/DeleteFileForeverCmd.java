@@ -20,7 +20,7 @@ public class DeleteFileForeverCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( id != null ) {
-            sqlSession.delete("org.le.base.file.deleteForever", id);
+            sqlSession.delete("com.qweather.leframework.base.file.deleteForever", id);
         }
         return null;
     }

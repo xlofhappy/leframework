@@ -29,7 +29,7 @@ public class GetUniqueCmd implements Command<UniqueEntity> {
         Map<String, String> map = new HashMap<>(2);
         map.put("unionId", unionId);
         map.put("type", type);
-        return sqlSession.selectOne("org.le.base.rbac.unique.get", map);
+        return sqlSession.selectOne("com.qweather.leframework.base.rbac.unique.get", map);
     }
 
 }

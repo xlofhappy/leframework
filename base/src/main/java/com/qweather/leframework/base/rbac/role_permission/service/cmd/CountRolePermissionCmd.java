@@ -20,7 +20,7 @@ public class CountRolePermissionCmd implements Command<Long> {
 
     @Override
     public Long execute(SqlSession sqlSession) {
-        return sqlSession.selectOne("org.le.base.rbac.role_permission.count", rolePermissionQueryImpl);
+        return sqlSession.selectOne("com.qweather.leframework.base.rbac.role_permission.count", rolePermissionQueryImpl);
     }
 
 }

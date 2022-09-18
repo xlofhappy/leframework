@@ -21,7 +21,7 @@ public class GetPermissionCmd implements Command<PermissionEntity> {
     @Override
     public PermissionEntity execute(SqlSession sqlSession) {
         if ( id != null ) {
-            return sqlSession.selectOne("org.le.base.rbac.permission.getById", new PermissionEntity(id));
+            return sqlSession.selectOne("com.qweather.leframework.base.rbac.permission.getById", new PermissionEntity(id));
         }
         return null;
     }

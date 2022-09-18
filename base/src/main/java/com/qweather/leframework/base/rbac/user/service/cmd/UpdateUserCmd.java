@@ -21,7 +21,7 @@ public class UpdateUserCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entity != null && entity.getId() != null ) {
-            sqlSession.insert("org.le.base.rbac.user.update", entity);
+            sqlSession.insert("com.qweather.leframework.base.rbac.user.update", entity);
         }
         return null;
     }

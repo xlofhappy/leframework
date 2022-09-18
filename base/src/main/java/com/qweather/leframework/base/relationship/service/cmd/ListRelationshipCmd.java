@@ -23,7 +23,7 @@ public class ListRelationshipCmd implements Command<List<RelationshipEntity>> {
 
     @Override
     public List<RelationshipEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.relationship.list", relationshipQuery);
+        return sqlSession.selectList("com.qweather.leframework.base.relationship.list", relationshipQuery);
     }
 
 }

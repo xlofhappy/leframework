@@ -22,7 +22,7 @@ public class ListRoleCmd implements Command<List<RoleEntity>> {
 
     @Override
     public List<RoleEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.rbac.role.list", roleQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.rbac.role.list", roleQueryImpl);
     }
 
 }

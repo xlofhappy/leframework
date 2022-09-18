@@ -23,7 +23,7 @@ public class ListVariableCmd implements Command<List<VariableEntity>> {
 
     @Override
     public List<VariableEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.variable.list", variableQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.variable.list", variableQueryImpl);
     }
 
 }

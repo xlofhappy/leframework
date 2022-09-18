@@ -21,7 +21,7 @@ public class UpdatePermissionCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entity != null && entity.getId() != null ) {
-            sqlSession.update("org.le.base.rbac.permission.update", entity);
+            sqlSession.update("com.qweather.leframework.base.rbac.permission.update", entity);
         }
         return null;
     }

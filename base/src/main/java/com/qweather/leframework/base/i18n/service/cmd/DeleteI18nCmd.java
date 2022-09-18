@@ -28,7 +28,7 @@ public class DeleteI18nCmd implements Command<Void> {
             Map<String, String> map = new HashMap<>(2);
             map.put("code", code);
             map.put("lang", lang);
-            sqlSession.delete("org.le.base.i18n.delete", map);
+            sqlSession.delete("com.qweather.leframework.base.i18n.delete", map);
         }
         return null;
     }

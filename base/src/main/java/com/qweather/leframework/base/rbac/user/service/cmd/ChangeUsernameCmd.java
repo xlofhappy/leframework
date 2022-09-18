@@ -28,7 +28,7 @@ public class ChangeUsernameCmd implements Command<Void> {
             Map<String, Object> map = new HashMap<>(2);
             map.put("id", id);
             map.put("username", username);
-            sqlSession.insert("org.le.base.rbac.user.changeUsername", map);
+            sqlSession.insert("com.qweather.leframework.base.rbac.user.changeUsername", map);
         }
         return null;
     }

@@ -22,7 +22,7 @@ public class InsertUserExtendCmd implements Command<Void> {
     public Void execute(SqlSession sqlSession) {
         if ( entity != null ) {
             if ( entity.getUid() != null && entity.getK() != null ) {
-                sqlSession.insert("org.le.base.rbac.user_extend.insert", entity);
+                sqlSession.insert("com.qweather.leframework.base.rbac.user_extend.insert", entity);
             }
         }
         return null;

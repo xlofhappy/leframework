@@ -27,7 +27,7 @@ public class DeleteRelationshipBySourceIdCmd implements Command<Void> {
         Map map = new HashMap(2);
         map.put("sourceId", sourceId);
         map.put("type", type.getType());
-        sqlSession.delete("org.le.base.relationship.deleteBySourceId", map);
+        sqlSession.delete("com.qweather.leframework.base.relationship.deleteBySourceId", map);
         return null;
     }
 }

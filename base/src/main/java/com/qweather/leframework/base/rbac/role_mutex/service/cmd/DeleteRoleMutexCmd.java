@@ -28,7 +28,7 @@ public class DeleteRoleMutexCmd implements Command<Void> {
             Map map = new HashMap<>(2);
             map.put("roleA", roleA);
             map.put("roleB", roleB);
-            sqlSession.delete("org.le.base.rbac.role_mutex.delete", map);
+            sqlSession.delete("com.qweather.leframework.base.rbac.role_mutex.delete", map);
         }
         return null;
     }

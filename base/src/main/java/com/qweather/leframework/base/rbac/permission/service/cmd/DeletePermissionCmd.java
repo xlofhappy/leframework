@@ -20,7 +20,7 @@ public class DeletePermissionCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( id != null ) {
-            sqlSession.delete("org.le.base.rbac.permission.delete", id);
+            sqlSession.delete("com.qweather.leframework.base.rbac.permission.delete", id);
         }
         return null;
     }

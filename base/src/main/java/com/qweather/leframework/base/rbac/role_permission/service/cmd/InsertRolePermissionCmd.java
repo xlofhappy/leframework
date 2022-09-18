@@ -21,7 +21,7 @@ public class InsertRolePermissionCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entity != null && entity.getPermissionId() != null && entity.getRoleId() != null ) {
-            sqlSession.insert("org.le.base.rbac.role_permission.insert", entity);
+            sqlSession.insert("com.qweather.leframework.base.rbac.role_permission.insert", entity);
         }
         return null;
     }

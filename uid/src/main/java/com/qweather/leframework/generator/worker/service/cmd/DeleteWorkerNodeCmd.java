@@ -20,7 +20,7 @@ public class DeleteWorkerNodeCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if (id != null) {
-            sqlSession.insert("org.le.uid.generator.worker.delete", id);
+            sqlSession.insert("com.qweather.leframework.uid.generator.worker.delete", id);
         }
         return null;
     }

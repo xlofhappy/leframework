@@ -31,7 +31,7 @@ public class ResetUserPasswordOriginCmd implements Command<Void> {
             map.put("id", id);
             map.put("password", password);
             map.put("salt", salt);
-            sqlSession.insert("org.le.base.rbac.user.resetPassword", map);
+            sqlSession.insert("com.qweather.leframework.base.rbac.user.resetPassword", map);
         }
         return null;
     }

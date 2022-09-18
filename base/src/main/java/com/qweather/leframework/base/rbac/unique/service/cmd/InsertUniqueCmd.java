@@ -22,7 +22,7 @@ public class InsertUniqueCmd implements Command<Void> {
     public Void execute(SqlSession sqlSession) {
         if ( entity != null ) {
             if ( entity.getUnionId() != null && entity.getType() != null && entity.getUid() != null ) {
-                sqlSession.insert("org.le.base.rbac.unique.insert", entity);
+                sqlSession.insert("com.qweather.leframework.base.rbac.unique.insert", entity);
             }
         }
         return null;

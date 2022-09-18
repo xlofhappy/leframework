@@ -28,7 +28,7 @@ public class UpdateUserStatusCmd implements Command<Void> {
             Map map = new HashMap(2);
             map.put("id", userId);
             map.put("status", status);
-            sqlSession.update("org.le.base.rbac.user.updateUserStatus", map);
+            sqlSession.update("com.qweather.leframework.base.rbac.user.updateUserStatus", map);
         }
         return null;
     }

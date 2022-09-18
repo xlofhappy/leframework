@@ -21,7 +21,7 @@ public class UpdateVariableCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entity != null ) {
-            sqlSession.update("org.le.base.variable.update", entity);
+            sqlSession.update("com.qweather.leframework.base.variable.update", entity);
         }
         return null;
     }

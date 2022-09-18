@@ -21,7 +21,7 @@ public class InsertWorkerNodeCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if (entity != null) {
-            sqlSession.insert("org.le.uid.generator.worker.insert", entity);
+            sqlSession.insert("com.qweather.leframework.uid.generator.worker.insert", entity);
         }
         return null;
     }

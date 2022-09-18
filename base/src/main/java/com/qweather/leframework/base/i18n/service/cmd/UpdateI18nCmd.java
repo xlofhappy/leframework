@@ -21,7 +21,7 @@ public class UpdateI18nCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( entity != null ) {
-            sqlSession.insert("org.le.base.i18n.update", entity);
+            sqlSession.insert("com.qweather.leframework.base.i18n.update", entity);
         }
         return null;
     }

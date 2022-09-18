@@ -22,7 +22,7 @@ public class ListUserCmd implements Command<List<UserEntity>> {
 
     @Override
     public List<UserEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.rbac.user.list", userQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.rbac.user.list", userQueryImpl);
     }
 
 }

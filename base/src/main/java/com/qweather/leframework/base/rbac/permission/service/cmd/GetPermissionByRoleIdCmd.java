@@ -23,7 +23,7 @@ public class GetPermissionByRoleIdCmd implements Command<List<PermissionEntity>>
     @Override
     public List<PermissionEntity> execute(SqlSession sqlSession) {
         if ( roleId != null ) {
-            return sqlSession.selectList("org.le.base.rbac.permission.getPermissionByRoleId", roleId);
+            return sqlSession.selectList("com.qweather.leframework.base.rbac.permission.getPermissionByRoleId", roleId);
         }
         return null;
     }

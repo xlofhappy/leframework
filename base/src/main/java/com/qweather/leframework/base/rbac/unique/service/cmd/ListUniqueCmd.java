@@ -22,7 +22,7 @@ public class ListUniqueCmd implements Command<List<UniqueEntity>> {
 
     @Override
     public List<UniqueEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.rbac.unique.list", uniqueQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.rbac.unique.list", uniqueQueryImpl);
     }
 
 }

@@ -20,7 +20,7 @@ public class CountDictionaryCmd implements Command<Long> {
 
     @Override
     public Long execute(SqlSession sqlSession) {
-        return sqlSession.selectOne("org.le.base.dictionary.count", dictionaryQueryImpl);
+        return sqlSession.selectOne("com.qweather.leframework.base.dictionary.count", dictionaryQueryImpl);
     }
 
 }

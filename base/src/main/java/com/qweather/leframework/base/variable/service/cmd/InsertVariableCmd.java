@@ -25,7 +25,7 @@ public class InsertVariableCmd implements Command<Void> {
             if ( entity.getId() == null ) {
                 entity.setId(Config.getDaoConfig().getIdPool().getNextId());
             }
-            sqlSession.insert("org.le.base.variable.insert", entity);
+            sqlSession.insert("com.qweather.leframework.base.variable.insert", entity);
         }
         return null;
     }

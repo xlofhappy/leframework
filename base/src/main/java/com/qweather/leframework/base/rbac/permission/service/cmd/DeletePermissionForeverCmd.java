@@ -20,7 +20,7 @@ public class DeletePermissionForeverCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( id != null ) {
-            sqlSession.delete("org.le.base.rbac.permission.deleteForever", id);
+            sqlSession.delete("com.qweather.leframework.base.rbac.permission.deleteForever", id);
         }
         return null;
     }

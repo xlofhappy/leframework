@@ -34,7 +34,7 @@ public class DeleteUserRoleCmd implements Command<Void> {
             if (roleId != null) {
                 map.put("roleId", roleId);
             }
-            sqlSession.delete("org.le.base.rbac.user_role.delete", map);
+            sqlSession.delete("com.qweather.leframework.base.rbac.user_role.delete", map);
         }
         return null;
     }

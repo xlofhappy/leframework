@@ -22,7 +22,7 @@ public class ListDictionaryCmd implements Command<List<DictionaryEntity>> {
 
     @Override
     public List<DictionaryEntity> execute(SqlSession sqlSession) {
-        return sqlSession.selectList("org.le.base.dictionary.list", dictionaryQueryImpl);
+        return sqlSession.selectList("com.qweather.leframework.base.dictionary.list", dictionaryQueryImpl);
     }
 
 }

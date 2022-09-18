@@ -28,7 +28,7 @@ public class DeleteRolePermissionCmd implements Command<Void> {
             Map map = new HashMap<>(2);
             map.put("roleId", roleId);
             map.put("permissionId", permissionId);
-            sqlSession.delete("org.le.base.rbac.role_permission.delete", map);
+            sqlSession.delete("com.qweather.leframework.base.rbac.role_permission.delete", map);
         }
         return null;
     }

@@ -20,7 +20,7 @@ public class DeleteUniqueByUidCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if (uid != null) {
-            sqlSession.delete("org.le.base.rbac.unique.deleteByUid", uid);
+            sqlSession.delete("com.qweather.leframework.base.rbac.unique.deleteByUid", uid);
         }
         return null;
     }

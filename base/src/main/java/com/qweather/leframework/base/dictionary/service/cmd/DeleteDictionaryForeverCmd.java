@@ -20,7 +20,7 @@ public class DeleteDictionaryForeverCmd implements Command<Void> {
     @Override
     public Void execute(SqlSession sqlSession) {
         if ( id != null ) {
-            sqlSession.delete("org.le.base.dictionary.deleteForever", id);
+            sqlSession.delete("com.qweather.leframework.base.dictionary.deleteForever", id);
         }
         return null;
     }

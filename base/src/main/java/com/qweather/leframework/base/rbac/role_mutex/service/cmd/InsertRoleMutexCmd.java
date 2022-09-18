@@ -25,7 +25,7 @@ public class InsertRoleMutexCmd implements Command<Void> {
             if ( entity.getId() == null ) {
                 entity.setId(Config.getDaoConfig().getIdPool().getNextId());
             }
-            sqlSession.insert("org.le.base.rbac.role_mutex.insert", entity);
+            sqlSession.insert("com.qweather.leframework.base.rbac.role_mutex.insert", entity);
         }
         return null;
     }
