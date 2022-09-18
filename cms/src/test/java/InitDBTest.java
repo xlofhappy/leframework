@@ -1,8 +1,8 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.le.base.rbac.permission.service.PermissionService;
-import org.le.base.rbac.role_permission.service.RolePermissionService;
-import org.le.cms.CmsApplication;
+import com.qweather.leframework.base.rbac.permission.service.PermissionService;
+import com.qweather.leframework.base.rbac.role_permission.service.RolePermissionService;
+import com.qweather.leframework.cms.CmsApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;

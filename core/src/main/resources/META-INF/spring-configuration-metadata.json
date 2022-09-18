@@ -2,25 +2,25 @@
   "groups": [
     {
       "name": "le",
-      "type": "org.le.core.properties.LeProperties",
-      "sourceType": "org.le.core.properties.LeProperties"
+      "type": "com.qweather.leframework.core.properties.LeProperties",
+      "sourceType": "com.qweather.leframework.core.properties.LeProperties"
     },
     {
       "name": "le.http",
-      "type": "org.le.core.properties.LePropertyHttp",
-      "sourceType": "org.le.core.properties.LeProperties",
+      "type": "com.qweather.leframework.core.properties.LePropertyHttp",
+      "sourceType": "com.qweather.leframework.core.properties.LeProperties",
       "sourceMethod": "getHttp()"
     },
     {
       "name": "le.path",
-      "type": "org.le.core.properties.LePropertyPath",
-      "sourceType": "org.le.core.properties.LeProperties",
+      "type": "com.qweather.leframework.core.properties.LePropertyPath",
+      "sourceType": "com.qweather.leframework.core.properties.LeProperties",
       "sourceMethod": "getPath()"
     },
     {
       "name": "le.redis",
-      "type": "org.le.core.properties.LePropertyRedis",
-      "sourceType": "org.le.core.properties.LeProperties",
+      "type": "com.qweather.leframework.core.properties.LePropertyRedis",
+      "sourceType": "com.qweather.leframework.core.properties.LeProperties",
       "sourceMethod": "getRedis()"
     }
   ],
@@ -29,132 +29,132 @@
       "name": "le.workspace",
       "type": "java.lang.String",
       "description": "system workspace",
-      "sourceType": "org.le.core.properties.LeProperties"
+      "sourceType": "com.qweather.leframework.core.properties.LeProperties"
     },
     {
       "name": "le.zone-offset",
       "type": "java.lang.Float",
-      "sourceType": "org.le.core.properties.LeProperties"
+      "sourceType": "com.qweather.leframework.core.properties.LeProperties"
     },
     {
       "name": "le.http.session-id",
       "type": "java.lang.String",
       "description": "key of session id in distributed system",
-      "sourceType": "org.le.core.properties.LePropertyHttp"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyHttp"
     },
     {
       "name": "le.http.session-id-prefix",
       "type": "java.lang.String",
-      "sourceType": "org.le.core.properties.LePropertyHttp"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyHttp"
     },
     {
       "name": "le.http.session-id-suffix",
       "type": "java.lang.String",
-      "sourceType": "org.le.core.properties.LePropertyHttp"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyHttp"
     },
     {
       "name": "le.http.session-id-domain",
       "type": "java.lang.String",
-      "sourceType": "org.le.core.properties.LePropertyHttp"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyHttp"
     },
     {
       "name": "le.http.session-timeout",
       "type": "java.lang.Integer",
-      "sourceType": "org.le.core.properties.LePropertyHttp"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyHttp"
     },
     {
       "name": "le.http.resource-version",
       "type": "java.lang.String",
-      "sourceType": "org.le.core.properties.LePropertyHttp"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyHttp"
     },
     {
       "name": "le.http.app-domain",
       "type": "java.lang.Boolean",
-      "sourceType": "org.le.core.properties.LePropertyHttp"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyHttp"
     },
     {
       "name": "le.http.app-uri",
       "type": "java.lang.Boolean",
-      "sourceType": "org.le.core.properties.LePropertyHttp"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyHttp"
     },
     {
       "name": "le.path.unAuthorized",
       "type": "java.lang.String",
-      "sourceType": "org.le.core.properties.LePropertyPath"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyPath"
     },
     {
       "name": "le.path.free",
       "type": "java.util.List<java.lang.String>",
       "description": "path skip interceptor",
-      "sourceType": "org.le.core.properties.LePropertyPath"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyPath"
     },
     {
       "name": "le.path.login",
       "type": "java.util.List<java.lang.String>",
       "description": "path only for logged (interceptor needed)",
-      "sourceType": "org.le.core.properties.LePropertyPath"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyPath"
     },
     {
       "name": "le.path.redirect-key",
       "type": "java.lang.String",
-      "sourceType": "org.le.core.properties.LePropertyPath"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyPath"
     },
     {
       "name": "le.path.error-code",
       "type": "java.lang.String",
       "description": "path only for logged, return json if not login with common error code (interceptor needed)",
-      "sourceType": "org.le.core.properties.LePropertyPath"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyPath"
     },
     {
       "name": "le.redis.usable",
       "type": "java.lang.Boolean",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     },
     {
       "name": "le.redis.addr",
       "type": "java.lang.String[]",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     },
     {
       "name": "le.redis.auth",
       "type": "java.lang.String[]",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     },
     {
       "name": "le.redis.port",
       "type": "java.lang.Integer[]",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     },
     {
       "name": "le.redis.db",
       "type": "java.lang.Integer[]",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     },
     {
       "name": "le.redis.max-idle",
       "type": "java.lang.Integer",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     },
     {
       "name": "le.redis.min-idle",
       "type": "java.lang.Integer",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     },
     {
       "name": "le.redis.max-active",
       "type": "java.lang.Integer",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     },
     {
       "name": "le.redis.max-wait",
       "type": "java.lang.Integer",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     },
     {
       "name": "le.redis.timeout",
       "type": "java.lang.Integer",
       "description": "timeout when create redis pool",
-      "sourceType": "org.le.core.properties.LePropertyRedis"
+      "sourceType": "com.qweather.leframework.core.properties.LePropertyRedis"
     }
   ]
 }

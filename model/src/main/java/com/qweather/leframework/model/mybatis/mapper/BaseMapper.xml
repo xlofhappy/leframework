@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qweather.leframework.model">
+    <resultMap id="idMap" type="com.qweather.leframework.model.BasePo">
+        <id property="id"               column="ID"/>
+    </resultMap>
+
+    <resultMap id="baseMap" type="com.qweather.leframework.model.po.LePo">
+        <id property="id"               column="ID"/>
+        <result property="remark"       column="REMARK"/>
+        <result property="authorId"     column="AUTHOR_ID"/>
+        <result property="authorTime"   column="AUTHOR_TIME"/>
+        <result property="modifyerId"   column="MODIFYER_ID"/>
+        <result property="modifyTime"   column="MODIFY_TIME"/>
+        <result property="display"      column="DISPLAY"/>
+        <result property="status"       column="STATUS"/>
+    </resultMap>
+
+
+</mapper>

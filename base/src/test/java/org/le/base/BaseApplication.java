@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author xiaole
  */
-@SpringBootApplication(scanBasePackages = "org.le")
+@SpringBootApplication(scanBasePackages = "com.qweather.leframework")
 public class BaseApplication {
 
     public static void main(String[] args) {

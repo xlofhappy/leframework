@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.le.base.relationship">
+    <resultMap type="com.qweather.leframework.base.relationship.service.po.RelationshipEntity" id="relationshipResultMap">
+        <result property="sourceId" column="SOURCE_ID"/>
+        <result property="type" column="TYPE"/>
+        <result property="targetId" column="TARGET_ID"/>
+    </resultMap>
+
+    <select id="list" parameterType="com.qweather.leframework.base.relationship.service.impl.RelationshipQueryImpl" resultMap="relationshipResultMap">
+        ${limitBefore}
+        SELECT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="com.qweather.leframework.base.relationship.service.impl.RelationshipQueryImpl" resultType="long">
+        SELECT COUNT(*)
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}relationship A
+        <where>
+            <if test="sourceId!=null and sourceId!=''">
+                AND A.SOURCE_ID = #{sourceId}
+            </if>
+            <if test="type!=null and type!=''">
+                AND A.TYPE = #{type}
+            </if>
+            <if test="targetId!=null and targetId!=''">
+                AND A.TARGET_ID = #{targetId}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="com.qweather.leframework.base.relationship.service.po.RelationshipEntity">
+        INSERT INTO ${baseTablePrefix}relationship (
+            SOURCE_ID,
+            TYPE,
+            TARGET_ID
+        )
+        VALUES (
+            #{sourceId,jdbcType=BIGINT},
+            #{type,jdbcType=VARCHAR},
+            #{targetId,jdbcType=BIGINT}
+        )
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}relationship (
+        SOURCE_ID,
+        TYPE,
+        TARGET_ID
+        )
+        VALUES
+        <foreach collection="list" item="relationship" index="index" separator=",">
+            (
+            #{relationship.sourceId,jdbcType=BIGINT},
+            #{relationship.type,jdbcType=VARCHAR},
+            #{relationship.targetId,jdbcType=BIGINT}
+            )
+        </foreach>
+    </insert>
+
+    <update id="delete">
+        DELETE FROM ${baseTablePrefix}relationship
+        WHERE SOURCE_ID = #{sourceId} AND TYPE = #{type} AND TARGET_ID = #{targetId}
+    </update>
+
+    <delete id="deleteBySourceId">
+        DELETE FROM ${baseTablePrefix}relationship
+        WHERE SOURCE_ID = #{sourceId} AND TYPE = #{type}
+    </delete>
+
+</mapper>

@@ -1,6 +1,6 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import org.le.model.po.LePo;
+import com.qweather.leframework.model.po.LePo;
 
 import java.io.IOException;
 

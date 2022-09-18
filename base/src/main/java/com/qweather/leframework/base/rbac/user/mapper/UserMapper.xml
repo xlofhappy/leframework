@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.le.base.rbac.user">
+    <resultMap type="com.qweather.leframework.base.rbac.user.service.po.UserEntity" extends="org.le.model.baseMap" id="userResultMap">
+        <result property="email" column="EMAIL"/>
+        <result property="username" column="USERNAME"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="salt" column="SALT"/>
+        <result property="nickname" column="NICKNAME"/>
+        <result property="realname" column="REALNAME"/>
+        <result property="sex" column="SEX"/>
+        <result property="phone" column="PHONE"/>
+        <result property="country" column="COUNTRY"/>
+        <result property="birthday" column="BIRTHDAY"/>
+        <result property="avatar" column="AVATAR"/>
+        <result property="lang" column="LANG"/>
+        <result property="passwordMark" column="PASSWORD_MARK"/>
+    </resultMap>
+
+    <select id="list" parameterType="com.qweather.leframework.base.rbac.user.service.impl.UserQueryImpl" resultMap="userResultMap">
+        ${limitBefore}
+        SELECT DISTINCT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="com.qweather.leframework.base.rbac.user.service.impl.UserQueryImpl" resultType="long">
+        SELECT COUNT(*) FROM (
+            SELECT DISTINCT *
+            <include refid="query"/>
+        ) CT
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}user A
+        <if test="unionId!=null and unionId!='' or unionIdLike!=null and unionIdLike!=''">
+            INNER JOIN ${baseTablePrefix}UNIQUE B ON A.ID = B.UID
+        </if>
+        <if test="roleId!=null or inRoles != null and inRoles.length > 0">
+            INNER JOIN ${baseTablePrefix}USER_ROLE C ON A.ID = C.USER_ID
+        </if>
+        <where>
+            A.DISPLAY = TRUE
+            <if test="id!=null">
+                AND A.ID = #{id}
+            </if>
+            <if test="idNotEquals!=null">
+                AND A.ID != #{idNotEquals}
+            </if>
+            <if test="username!=null and username!=''">
+                AND A.USERNAME = #{username}
+            </if>
+            <if test="authorTime!=null and authorTime!=''">
+                AND A.AUTHOR_TIME >= #{authorTime}
+            </if>
+            <if test="authorTimeAfter!=null and authorTimeAfter!=''">
+                AND A.AUTHOR_TIME > #{authorTimeAfter}
+            </if>
+            <if test="authorTimeLike!=null and authorTimeLike!=''">
+                AND A.AUTHOR_TIME LIKE concat(#{authorTimeLike}, '%') escape '/'
+            </if>
+            <if test="nickname!=null and nickname!=''">
+                AND A.NICKNAME = #{nickname}
+            </if>
+            <if test="realname!=null and realname!=''">
+                AND A.REALNAME = #{realname}
+            </if>
+            <if test="status!=null">
+                AND A.STATUS = #{status}
+            </if>
+            <if test="phone!=null and phone!=''">
+                AND A.PHONE = #{phone}
+            </if>
+            <if test="country!=null and country!=''">
+                AND A.COUNTRY = #{country}
+            </if>
+            <if test="idNotEquals!=null and idNotEquals!=''">
+                AND A.ID != #{idNotEquals}
+            </if>
+            <if test="email!=null and email!=''">
+                AND A.EMAIL = #{email}
+            </if>
+            <if test="emailLike!=null and emailLike!=''">
+                AND A.EMAIL LIKE concat(#{emailLike}, '%') escape '/'
+            </if>
+            <if test="unionId!=null and unionId!=''">
+                AND B.UNION_ID = #{unionId}
+                <if test="type!=null and type!=''">
+                    AND B.TYPE = #{type}
+                </if>
+            </if>
+            <if test="unionIdLike!=null and unionIdLike!=''">
+                AND B.UNION_ID LIKE concat(#{unionIdLike}, '%') escape '/'
+                <if test="type!=null and type!=''">
+                    AND B.TYPE = #{type}
+                </if>
+            </if>
+            <if test="roleId!=null and roleId !=''">
+                AND C.ROLE_ID = #{roleId}
+            </if>
+            <if test="inRoles!=null and inRoles.length > 0">
+                AND C.ROLE_ID IN
+                <foreach collection="inRoles" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="com.qweather.leframework.base.rbac.user.service.po.UserEntity">
+        INSERT INTO ${baseTablePrefix}user (ID,
+                                            REMARK,
+                                            AUTHOR_ID,
+                                            AUTHOR_TIME,
+                                            MODIFYER_ID,
+                                            MODIFY_TIME,
+                                            STATUS,
+                                            DISPLAY,
+
+                                            EMAIL,
+                                            USERNAME,
+                                            PASSWORD,
+                                            SALT,
+                                            NICKNAME,
+                                            REALNAME,
+                                            SEX,
+                                            PHONE,
+                                            COUNTRY,
+                                            BIRTHDAY,
+                                            AVATAR,
+                                            LANG,
+                                            PASSWORD_MARK
+                                            )
+        VALUES (#{id,jdbcType=BIGINT},
+                #{remark,jdbcType=VARCHAR},
+                #{authorId,jdbcType=BIGINT},
+                #{authorTime,jdbcType=VARCHAR},
+                #{modifyerId,jdbcType=BIGINT},
+                #{modifyTime,jdbcType=VARCHAR},
+                #{status,jdbcType=TINYINT},
+                #{display,jdbcType=TINYINT},
+                #{email,jdbcType=VARCHAR},
+                #{username,jdbcType=VARCHAR},
+                #{password,jdbcType=VARCHAR},
+                #{salt,jdbcType=VARCHAR},
+                #{nickname,jdbcType=VARCHAR},
+                #{realname,jdbcType=VARCHAR},
+                #{sex,jdbcType=TINYINT},
+                #{phone,jdbcType=VARCHAR},
+                #{country,jdbcType=VARCHAR},
+                #{birthday,jdbcType=VARCHAR},
+                #{avatar,jdbcType=VARCHAR},
+                #{lang,jdbcType=VARCHAR},
+                #{passwordMark,jdbcType=TINYINT})
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}user (
+        ID,
+        REMARK,
+        AUTHOR_ID,
+        AUTHOR_TIME,
+        MODIFYER_ID,
+        MODIFY_TIME,
+        STATUS,
+        DISPLAY,
+
+        EMAIL,
+        USERNAME,
+        PASSWORD,
+        SALT,
+        NICKNAME,
+        REALNAME,
+        SEX,
+        PHONE,
+        COUNTRY,
+        BIRTHDAY,
+        AVATAR,
+        LANG,
+        PASSWORD_MARK
+        )
+        VALUES
+        <foreach collection="list" item="user" index="index" separator=",">
+            (
+            #{user.id,jdbcType=BIGINT},
+            #{user.remark,jdbcType=VARCHAR},
+            #{user.authorId,jdbcType=BIGINT},
+            #{user.authorTime,jdbcType=VARCHAR},
+            #{user.modifyerId,jdbcType=BIGINT},
+            #{user.modifyTime,jdbcType=VARCHAR},
+            #{user.status,jdbcType=TINYINT},
+            #{user.display,jdbcType=TINYINT},
+
+            #{user.email,jdbcType=VARCHAR},
+            #{user.username,jdbcType=VARCHAR},
+            #{user.password,jdbcType=VARCHAR},
+            #{user.salt,jdbcType=VARCHAR},
+            #{user.nickname,jdbcType=VARCHAR},
+            #{user.realname,jdbcType=VARCHAR},
+            #{user.sex,jdbcType=TINYINT},
+            #{user.phone,jdbcType=VARCHAR},
+            #{user.country,jdbcType=VARCHAR},
+            #{user.birthday,jdbcType=VARCHAR},
+            #{user.avatar,jdbcType=VARCHAR},
+            #{user.lang,jdbcType=VARCHAR},
+            #{user.passwordMark,jdbcType=TINYINT})
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE ${baseTablePrefix}user
+        SET REMARK      = #{remark,jdbcType=VARCHAR},
+            AUTHOR_ID   = #{authorId,jdbcType=BIGINT},
+            AUTHOR_TIME = #{authorTime,jdbcType=VARCHAR},
+            MODIFYER_ID = #{modifyerId,jdbcType=BIGINT},
+            MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+            STATUS      = #{status,jdbcType=TINYINT},
+            DISPLAY     = #{display,jdbcType=TINYINT},
+
+            EMAIL       = #{email,jdbcType=VARCHAR},
+            USERNAME    = #{username,jdbcType=VARCHAR},
+            PASSWORD    = #{password,jdbcType=VARCHAR},
+            SALT        = #{salt,jdbcType=VARCHAR},
+            NICKNAME    = #{nickname,jdbcType=VARCHAR},
+            REALNAME    = #{realname,jdbcType=VARCHAR},
+            SEX         = #{sex,jdbcType=INTEGER},
+            PHONE       = #{phone,jdbcType=VARCHAR},
+            COUNTRY     = #{country,jdbcType=VARCHAR},
+            BIRTHDAY    = #{birthday,jdbcType=VARCHAR},
+            AVATAR      = #{avatar,jdbcType=VARCHAR},
+            LANG        = #{lang,jdbcType=VARCHAR},
+            PASSWORD_MARK  = #{passwordMark,jdbcType=TINYINT}
+        WHERE ID = #{id} AND ID != 0
+    </update>
+
+    <select id="getById" resultMap="userResultMap">
+        SELECT *
+        FROM ${baseTablePrefix}user
+        WHERE DISPLAY = TRUE
+          AND ID = #{id}
+    </select>
+
+    <update id="delete">
+        DELETE
+        FROM ${baseTablePrefix}user
+        WHERE ID = #{id} AND ID != 0
+    </update>
+
+    <update id="updateUserStatus">
+        UPDATE ${baseTablePrefix}user
+        SET STATUS = #{status}
+        WHERE ID = #{id} AND ID != 0
+    </update>
+
+    <update id="resetPassword">
+        UPDATE ${baseTablePrefix}user
+        SET PASSWORD = #{password}
+        <if test="salt!=null and salt!=''">
+            , SALT = #{salt}
+        </if>
+        WHERE ID = #{id} AND ID != 0
+    </update>
+
+    <update id="changeUsername">
+        UPDATE ${baseTablePrefix}user
+        SET USERNAME = #{username}
+        WHERE ID = #{id} AND ID != 0
+    </update>
+
+</mapper>

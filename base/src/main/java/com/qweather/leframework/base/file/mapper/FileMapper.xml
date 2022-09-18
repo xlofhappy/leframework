@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.le.base.file">
+    <resultMap type="com.qweather.leframework.base.file.service.po.FileEntity" extends="org.le.model.baseMap" id="fileResultMap">
+        <result property="sourceName" column="SOURCE_NAME"/>
+        <result property="name" column="NAME"/>
+        <result property="path" column="PATH"/>
+        <result property="size" column="SIZE"/>
+        <result property="ext" column="EXT"/>
+        <result property="data" column="DATA"/>
+    </resultMap>
+
+    <select id="list" parameterType="com.qweather.leframework.base.file.service.impl.FileQueryImpl" resultMap="fileResultMap">
+        ${limitBefore}
+        SELECT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="com.qweather.leframework.base.file.service.impl.FileQueryImpl" resultType="long">
+        SELECT COUNT(*)
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}file A
+        <where>
+            A.DISPLAY = TRUE
+            <if test="id!=null ">
+                AND A.ID = #{id}
+            </if>
+            <if test="sourceName!=null and sourceName!=''">
+                AND A.SOURCE_NAME = #{sourceName}
+            </if>
+            <if test="name!=null and name!=''">
+                AND A.NAME = #{name}
+            </if>
+            <if test="path!=null and path!=''">
+                AND A.PATH = #{path}
+            </if>
+            <if test="ext!=null and ext!=''">
+                AND A.EXT = #{ext}
+            </if>
+            <if test="data!=null and data!=''">
+                AND A.DATA = #{data}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="com.qweather.leframework.base.file.service.po.FileEntity">
+        INSERT INTO ${baseTablePrefix}file (ID,
+                             REMARK,
+                             AUTHOR_ID,
+                             AUTHOR_TIME,
+                             MODIFYER_ID,
+                             MODIFY_TIME,
+                             STATUS,
+                             DISPLAY,
+                             SOURCE_NAME,
+                             NAME,
+                             PATH,
+                             SIZE,
+                             EXT,
+                             DATA)
+        VALUES (#{id,jdbcType=BIGINT},
+                #{remark,jdbcType=VARCHAR},
+                #{authorId,jdbcType=BIGINT},
+                #{authorTime,jdbcType=VARCHAR},
+                #{modifyerId,jdbcType=BIGINT},
+                #{modifyTime,jdbcType=VARCHAR},
+                #{status,jdbcType=TINYINT},
+                #{display,jdbcType=TINYINT},
+
+                #{sourceName,jdbcType=VARCHAR},
+                #{name,jdbcType=VARCHAR},
+                #{path,jdbcType=VARCHAR},
+                #{size,jdbcType=BIGINT},
+                #{ext,jdbcType=VARCHAR},
+                #{data,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}file (
+        ID,
+        REMARK,
+        AUTHOR_ID,
+        AUTHOR_TIME,
+        MODIFYER_ID,
+        MODIFY_TIME,
+        STATUS,
+        DISPLAY,
+        SOURCE_NAME, NAME, PATH, SIZE, EXT, DATA )
+        VALUES
+        <foreach collection="list" item="file" index="index" separator=",">
+            (
+            #{file.id,jdbcType=BIGINT},
+            #{file.remark,jdbcType=VARCHAR},
+            #{file.authorId,jdbcType=BIGINT},
+            #{file.authorTime,jdbcType=VARCHAR},
+            #{file.modifyerId,jdbcType=BIGINT},
+            #{file.modifyTime,jdbcType=VARCHAR},
+            #{file.status,jdbcType=TINYINT},
+            #{file.display,jdbcType=TINYINT},
+
+            #{file.sourceName,jdbcType=VARCHAR},
+            #{file.name,jdbcType=VARCHAR},
+            #{file.path,jdbcType=VARCHAR},
+            #{file.size,jdbcType=BIGINT},
+            #{file.ext,jdbcType=VARCHAR},
+            #{file.data,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE ${baseTablePrefix}file
+        SET REMARK      = #{remark,jdbcType=VARCHAR},
+            AUTHOR_ID   = #{authorId,jdbcType=BIGINT},
+            AUTHOR_TIME = #{authorTime,jdbcType=VARCHAR},
+            MODIFYER_ID = #{modifyerId,jdbcType=BIGINT},
+            MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+            STATUS      = #{status,jdbcType=TINYINT},
+            DISPLAY     = #{display,jdbcType=TINYINT},
+            SOURCE_NAME = #{sourceName,jdbcType=VARCHAR},
+            NAME        = #{name,jdbcType=VARCHAR},
+            PATH        = #{path,jdbcType=VARCHAR},
+            SIZE        = #{size,jdbcType=BIGINT},
+            EXT         = #{ext,jdbcType=VARCHAR},
+            DATA        = #{data,jdbcType=VARCHAR}
+        WHERE ID = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE ${baseTablePrefix}file
+        SET DISPLAY = FALSE
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteForever">
+        DELETE
+        FROM ${baseTablePrefix}file
+        WHERE ID = #{id}
+    </delete>
+
+</mapper>

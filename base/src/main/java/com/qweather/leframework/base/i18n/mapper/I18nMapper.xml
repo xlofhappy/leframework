@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.le.base.i18n">
+    <resultMap type="com.qweather.leframework.base.i18n.service.po.I18nEntity" id="i18nResultMap">
+        <result property="code" column="CODE"/>
+        <result property="lang" column="LANG"/>
+        <result property="content" column="CONTENT"/>
+    </resultMap>
+
+    <select id="list" parameterType="com.qweather.leframework.base.i18n.service.impl.I18nQueryImpl" resultMap="i18nResultMap">
+        ${limitBefore}
+        SELECT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="com.qweather.leframework.base.i18n.service.impl.I18nQueryImpl" resultType="long">
+        SELECT COUNT(*)
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}i18n A
+        <where>
+            <if test="code!=null and code!=''">
+                AND A.CODE = #{code}
+            </if>
+            <if test="codeLike!=null and codeLike!=''">
+                AND A.CODE like concat(#{codeLike}, '%') escape '/'
+            </if>
+            <if test="lang!=null and lang!=''">
+                AND A.LANG = #{lang}
+            </if>
+            <if test="content!=null and content!=''">
+                AND CONTENT = #{content}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="com.qweather.leframework.base.i18n.service.po.I18nEntity">
+        INSERT INTO ${baseTablePrefix}i18n (CODE, LANG, CONTENT)
+        VALUES (#{code,jdbcType=VARCHAR}, #{lang,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}i18n (
+        CODE, LANG, CONTENT )
+        VALUES
+        <foreach collection="list" item="i18n" index="index" separator=",">
+            (
+            #{i18n.code,jdbcType=VARCHAR},
+            #{i18n.lang,jdbcType=VARCHAR},
+            #{i18n.content,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE ${baseTablePrefix}i18n
+        SET CONTENT = #{content,jdbcType=VARCHAR}
+        WHERE CODE = #{code,jdbcType=VARCHAR}
+          AND LANG = #{lang,jdbcType=VARCHAR}
+    </update>
+
+    <update id="delete">
+        DELETE
+        FROM ${baseTablePrefix}i18n
+        WHERE CODE = #{code,jdbcType=VARCHAR}
+          AND LANG = #{lang,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

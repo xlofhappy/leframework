@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.le.base.dictionary">
+    <resultMap type="com.qweather.leframework.base.dictionary.service.po.DictionaryEntity" extends="org.le.model.baseMap"
+               id="dictionaryResultMap">
+        <result property="pid" column="PID"/>
+        <result property="code" column="CODE"/>
+        <result property="value" column="VALUE"/>
+    </resultMap>
+
+    <select id="list" parameterType="com.qweather.leframework.base.dictionary.service.impl.DictionaryQueryImpl"
+            resultMap="dictionaryResultMap">
+        ${limitBefore}
+        SELECT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="com.qweather.leframework.base.dictionary.service.impl.DictionaryQueryImpl" resultType="long">
+        SELECT COUNT(*)
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}dictionary A
+        <where>
+            A.DISPLAY = TRUE
+            <if test="id!=null">
+                AND A.ID = #{id}
+            </if>
+            <if test="pid!=null">
+                AND A.PID = #{pid}
+            </if>
+            <if test="code!=null and code!=''">
+                AND A.CODE = #{code}
+            </if>
+            <if test="value!=null and value!=''">
+                AND A.VALUE = #{value}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="com.qweather.leframework.base.dictionary.service.po.DictionaryEntity">
+        INSERT INTO ${baseTablePrefix}dictionary (ID,
+                                   REMARK,
+                                   AUTHOR_ID,
+                                   AUTHOR_TIME,
+                                   MODIFYER_ID,
+                                   MODIFY_TIME,
+                                   STATUS,
+                                   DISPLAY,
+                                   PID,
+                                   CODE,
+                                   VALUE)
+        VALUES (#{id,jdbcType=BIGINT},
+                #{remark,jdbcType=VARCHAR},
+                #{authorId,jdbcType=BIGINT},
+                #{authorTime,jdbcType=VARCHAR},
+                #{modifyerId,jdbcType=BIGINT},
+                #{modifyTime,jdbcType=VARCHAR},
+                #{status,jdbcType=TINYINT},
+                #{display,jdbcType=TINYINT},
+                #{pid,jdbcType=BIGINT},
+                #{code,jdbcType=VARCHAR},
+                #{value,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}dictionary (
+        ID,
+        REMARK,
+        AUTHOR_ID,
+        AUTHOR_TIME,
+        MODIFYER_ID,
+        MODIFY_TIME,
+        STATUS,
+        DISPLAY,
+        PID, CODE, VALUE )
+        VALUES
+        <foreach collection="list" item="dictionary" index="index" separator=",">
+            (
+            #{dictionary.id,jdbcType=BIGINT},
+            #{dictionary.remark,jdbcType=VARCHAR},
+            #{dictionary.authorId,jdbcType=BIGINT},
+            #{dictionary.authorTime,jdbcType=VARCHAR},
+            #{dictionary.modifyerId,jdbcType=BIGINT},
+            #{dictionary.modifyTime,jdbcType=VARCHAR},
+            #{dictionary.status,jdbcType=TINYINT},
+            #{dictionary.display,jdbcType=TINYINT},
+
+            #{dictionary.pid,jdbcType=BIGINT},
+            #{dictionary.code,jdbcType=VARCHAR},
+            #{dictionary.value,jdbcType=VARCHAR} )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE ${baseTablePrefix}dictionary
+        set REMARK        = #{remark,jdbcType=VARCHAR},
+            AUTHOR_ID     = #{authorId,jdbcType=BIGINT},
+            AUTHOR_TIME   = #{authorTime,jdbcType=VARCHAR},
+            MODIFYER_ID   = #{modifyerId,jdbcType=BIGINT},
+            MODIFY_TIME   = #{modifyTime,jdbcType=VARCHAR},
+            STATUS        = #{status,jdbcType=TINYINT},
+            DISPLAY       = #{display,jdbcType=TINYINT},
+            PID           = #{pid,jdbcType=BIGINT},
+            CODE          = #{code,jdbcType=VARCHAR},
+            VALUE         = #{value,jdbcType=VARCHAR}
+        where ID = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE ${baseTablePrefix}dictionary
+        SET DISPLAY = FALSE
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteForever">
+        DELETE
+        FROM ${baseTablePrefix}dictionary
+        WHERE ID = #{id}
+    </delete>
+
+    <select id="getClosestChildren" resultMap="dictionaryResultMap">
+        SELECT  A.*
+        FROM ${baseTablePrefix}dictionary A
+        WHERE A.DISPLAY = TRUE AND A.PID = #{pid}
+
+    </select>
+
+</mapper>

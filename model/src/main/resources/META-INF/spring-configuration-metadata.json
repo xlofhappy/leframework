@@ -2,13 +2,13 @@
   "groups": [
     {
       "name": "le",
-      "type": "org.le.model.common.properties.ModelProperties",
-      "sourceType": "org.le.model.common.properties.ModelProperties"
+      "type": "com.qweather.leframework.model.common.properties.ModelProperties",
+      "sourceType": "com.qweather.leframework.model.common.properties.ModelProperties"
     },
     {
       "name": "le.db",
-      "type": "org.le.model.common.properties.ModelPropertyDB",
-      "sourceType": "org.le.model.common.properties.ModelProperties",
+      "type": "com.qweather.leframework.model.common.properties.ModelPropertyDB",
+      "sourceType": "com.qweather.leframework.model.common.properties.ModelProperties",
       "sourceMethod": "getDb()"
     }
   ],
@@ -16,7 +16,7 @@
     {
       "name": "le.db.base-table-prefix",
       "type": "java.lang.String",
-      "sourceType": "org.le.model.common.properties.ModelPropertyDB"
+      "sourceType": "com.qweather.leframework.model.common.properties.ModelPropertyDB"
     }
   ]
 }

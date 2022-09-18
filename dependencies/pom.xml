@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.le</groupId>
+        <groupId>com.qweather.leframework</groupId>
         <artifactId>root</artifactId>
         <version>${revision}</version>
     </parent>
@@ -23,6 +23,7 @@
         <springboot.version>2.2.13.RELEASE</springboot.version>
         <spring.session.version>2021.1.1</spring.session.version>
         <guava.version>31.0.1-jre</guava.version>
+        <email.version>1.5</email.version>
 
         <postgis-jdbc.version>2021.1.0</postgis-jdbc.version>
 
@@ -58,22 +59,27 @@
                 <version>${mybatis-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.le</groupId>
+                <groupId>com.qweather.leframework</groupId>
                 <artifactId>core</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>org.le</groupId>
+                <groupId>com.qweather.leframework</groupId>
                 <artifactId>model</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>org.le</groupId>
+                <groupId>com.qweather.leframework</groupId>
                 <artifactId>uid</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>org.le</groupId>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-email</artifactId>
+                <version>${email.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qweather.leframework</groupId>
                 <artifactId>base</artifactId>
                 <version>${revision}</version>
             </dependency>
