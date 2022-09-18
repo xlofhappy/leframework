@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.le.base.rbac.user_extend">
+    <resultMap type="org.le.base.rbac.user_extend.service.po.UserExtendEntity" id="userExtendResultMap">
+        <result property="uid" column="UID"/>
+        <result property="k" column="K"/>
+        <result property="v" column="V"/>
+    </resultMap>
+
+    <select id="list" parameterType="org.le.base.rbac.user_extend.service.impl.UserExtendQueryImpl"
+            resultMap="userExtendResultMap">
+        ${limitBefore}
+        SELECT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="org.le.base.rbac.user_extend.service.impl.UserExtendQueryImpl" resultType="long">
+        SELECT COUNT(*)
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}user_extend A
+        <where>
+            <if test="uid!=null and uid!=''">
+                AND A.UID = #{uid}
+            </if>
+            <if test="k!=null">
+                AND A.K = #{k}
+            </if>
+            <if test="v!=null and v!=''">
+                AND A.V = #{v}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="org.le.base.rbac.user_extend.service.po.UserExtendEntity">
+        INSERT INTO ${baseTablePrefix}user_extend (UID, K, V)
+        VALUES (#{uid,jdbcType=BIGINT}, #{k,jdbcType=INTEGER}, #{v,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}user_extend
+        (
+        UID, K, V
+        )
+        VALUES
+        <foreach collection="list" item="userExtend" index="index" separator=",">
+            (
+            #{userExtend.uid,jdbcType=BIGINT},
+            #{userExtend.k,jdbcType=INTEGER},
+            #{userExtend.v,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM ${baseTablePrefix}user_extend
+        WHERE UID = #{uid}
+        <if test="k!=null">
+            AND K = #{k}
+        </if>
+    </delete>
+    <update id="updateUserExtend">
+        UPDATE ${baseTablePrefix}user_extend
+        SET V = #{v}
+        WHERE Uid = #{uid} AND K = #{k}
+    </update>
+
+</mapper>

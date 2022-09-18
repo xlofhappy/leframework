@@ -1,0 +1,73 @@
+server:
+  address: 127.0.0.1
+  port: 8080
+
+
+spring:
+  datasource:
+    # 配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过名字来区分开来。
+    # 没有配置，将会生成一个名字，格式是："DataSource-" + System.identityHashCode(this)
+    name: 'ddd'
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 这一项可配可不配，如果不配置druid会根据url自动识别dbType，然后选择相应的driverClassName(建议配置下)
+    driverClassName: com.mysql.cj.jdbc.Driver
+    # 连接数据库的url
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
+    # 连接数据库的用户名
+    username: root
+    # 连接数据库的密码。如果你不希望密码直接写在配置文件中，可以使用ConfigFilter
+    password: 123456
+    # 连接池中保留的最小连接数
+    minIdle: 3
+    # 连接池最大使用连接数量
+    maxActive: 20
+    # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
+    initialSize: 1
+    # 获取连接最大等待时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    # 用来检测连接是否有效的sql，要求是一个查询语句。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用
+    validationQuery: SELECT 1
+    # 默认 false 。建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+    testWhileIdle: true
+    # 默认 true 。申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+    testOnBorrow: true
+    # 默认 false 。归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+    testOnReturn: true
+    # 是否缓存preparedStatement，也就是PSCache。默认false。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭
+    poolPreparedStatements: true
+    # 默认-1。要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+    maxOpenPreparedStatements: 20
+    # 对于长时间不使用的连接强制关闭
+    removeAbandoned: true
+    # 超过30分钟开始关闭空闲连接 单位秒
+    removeAbandonedTimeout: 1800
+
+  freemarker:
+    template-loader-path: classpath:/themes/
+    charset: UTF-8
+  jackson:
+    default-property-inclusion: NON_NULL
+
+mybatis:
+  #注意：一定要对应mapper映射xml文件的所在路径
+  mapper-locations: classpath*:/**/*Mapper.xml
+  executor-type: batch
+
+le:
+  db:
+    base-table-prefix: 'le_'
+  path:
+    free:
+      - '/'
+      - '/login'
+      - '/login/do'
+      - '/logout'
+      - '/verify'
+      - '/v1/rest/admin/**'
+  http:
+    resource-version: '20200815'

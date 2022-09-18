@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.le.uid.generator.worker">
+    <resultMap type="org.le.uid.generator.worker.service.pojo.WorkerNodeEntity" extends="org.le.model.baseMap"
+               id="workerNodeResultMap">
+        <result property="hostName" column="HOST_NAME"/>
+        <result property="port" column="PORT"/>
+        <result property="type" column="TYPE"/>
+    </resultMap>
+
+    <select id="list" parameterType="org.le.uid.generator.worker.service.impl.WorkerNodeQueryImpl"
+            resultMap="workerNodeResultMap">
+        ${limitBefore}
+        SELECT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="org.le.uid.generator.worker.service.impl.WorkerNodeQueryImpl" resultType="long">
+        SELECT COUNT(*)
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}worker_node A
+        <where>
+            <if test="id!=null">
+                AND A.ID = #{id}
+            </if>
+            <if test="hostName!=null and hostName!=''">
+                AND A.HOST_NAME = #{hostName}
+            </if>
+            <if test="port!=null and port!=''">
+                AND A.PORT = #{port}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="org.le.uid.generator.worker.service.pojo.WorkerNodeEntity">
+        INSERT INTO ${baseTablePrefix}worker_node (ID,
+                                                   REMARK,
+                                                   AUTHOR_ID,
+                                                   AUTHOR_TIME,
+                                                   MODIFYER_ID,
+                                                   MODIFY_TIME,
+                                                   STATUS,
+                                                   DISPLAY,
+                                                   HOST_NAME,
+                                                   PORT,
+                                                   TYPE)
+        VALUES (#{id,jdbcType=BIGINT},
+                #{remark,jdbcType=VARCHAR},
+                #{authorId,jdbcType=BIGINT},
+                #{authorTime,jdbcType=VARCHAR},
+                #{modifyerId,jdbcType=BIGINT},
+                #{modifyTime,jdbcType=VARCHAR},
+                #{status,jdbcType=TINYINT},
+                #{display,jdbcType=TINYINT},
+                #{hostName,jdbcType=VARCHAR},
+                #{port,jdbcType=VARCHAR},
+                #{type})
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}worker_node (ID,
+        REMARK,
+        AUTHOR_ID,
+        AUTHOR_TIME,
+        MODIFYER_ID,
+        MODIFY_TIME,
+        STATUS,
+        DISPLAY,
+        PID,
+        HOST_NAME,
+        PORT,
+        TYPE)
+        VALUES
+        <foreach collection="list" item="workerNode" index="index" separator=",">
+            (
+            #{workerNode.id,jdbcType=BIGINT},
+            #{workerNode.remark,jdbcType=VARCHAR},
+            #{workerNode.authorId,jdbcType=BIGINT},
+            #{workerNode.authorTime,jdbcType=VARCHAR},
+            #{workerNode.modifyerId,jdbcType=BIGINT},
+            #{workerNode.modifyTime,jdbcType=VARCHAR},
+            #{workerNode.status,jdbcType=TINYINT},
+            #{workerNode.display,jdbcType=TINYINT},
+            #{workerNode.hostName, jdbcType=VARCHAR},
+            #{workerNode.port, jdbcType=VARCHAR},
+            #{workerNode.type}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateTime">
+        UPDATE ${baseTablePrefix}worker_node
+        SET MODIFY_TIME = #{time}
+        WHERE ID = #{id}
+          and MODIFY_TIME &lt; #{time}
+    </update>
+    <delete id="delete">
+        DELETE
+        FROM ${baseTablePrefix}worker_node
+        WHERE ID = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.le.base.rbac.role">
+    <resultMap type="org.le.base.rbac.role.service.po.RoleEntity" extends="org.le.model.baseMap" id="roleResultMap">
+        <result property="pid" column="PID"/>
+        <result property="code" column="CODE"/>
+        <result property="name" column="NAME"/>
+        <result property="permissionLimit" column="PERMISSION_LIMIT"/>
+        <result property="needRoleId" column="NEED_ROLE_ID"/>
+        <result property="description" column="DESCRIPTION"/>
+    </resultMap>
+
+    <select id="list" parameterType="org.le.base.rbac.role.service.impl.RoleQueryImpl" resultMap="roleResultMap">
+        ${limitBefore}
+        SELECT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="org.le.base.rbac.role.service.impl.RoleQueryImpl" resultType="long">
+        SELECT COUNT(*)
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}role A
+        <where>
+            A.DISPLAY = TRUE
+            <if test="id!=null">
+                AND A.ID = #{id}
+            </if>
+            <if test="pid!=null">
+                AND A.PID = #{pid}
+            </if>
+            <if test="code!=null and code!=''">
+                AND A.CODE = #{code}
+            </if>
+            <if test="name!=null and name!=''">
+                AND A.NAME = #{name}
+            </if>
+            <if test="permissionLimit!=null and permissionLimit!=''">
+                AND A.PERMISSION_LIMIT = #{permissionLimit}
+            </if>
+            <if test="needRoleId!=null and needRoleId!=''">
+                AND A.NEED_ROLE_ID = #{needRoleId}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="org.le.base.rbac.role.service.po.RoleEntity">
+        INSERT INTO ${baseTablePrefix}role (ID,
+                             REMARK,
+                             AUTHOR_ID,
+                             AUTHOR_TIME,
+                             MODIFYER_ID,
+                             MODIFY_TIME,
+                             STATUS,
+                             DISPLAY,
+                             PID,
+                             CODE,
+                             NAME,
+                             PERMISSION_LIMIT,
+                             NEED_ROLE_ID,
+                             DESCRIPTION)
+        VALUES (#{id,jdbcType=BIGINT},
+                #{remark,jdbcType=VARCHAR},
+                #{authorId,jdbcType=BIGINT},
+                #{authorTime,jdbcType=VARCHAR},
+                #{modifyerId,jdbcType=BIGINT},
+                #{modifyTime,jdbcType=VARCHAR},
+                #{status,jdbcType=TINYINT},
+                #{display,jdbcType=TINYINT},
+
+                #{pid,jdbcType=BIGINT},
+                #{code,jdbcType=VARCHAR},
+                #{name,jdbcType=VARCHAR},
+                #{permissionLimit,jdbcType=INTEGER},
+                #{needRoleId,jdbcType=BIGINT},
+                #{description,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}role (
+        ID,
+        REMARK,
+        AUTHOR_ID,
+        AUTHOR_TIME,
+        MODIFYER_ID,
+        MODIFY_TIME,
+        STATUS,
+        DISPLAY,
+
+        PID,
+        CODE,
+        NAME,
+        PERMISSION_LIMIT,
+        NEED_ROLE_ID,
+        DESCRIPTION
+        )
+        VALUES
+        <foreach collection="list" item="role" index="index" separator=",">
+            (
+            #{role.id,jdbcType=BIGINT},
+            #{role.remark,jdbcType=VARCHAR},
+            #{role.authorId,jdbcType=BIGINT},
+            #{role.authorTime,jdbcType=VARCHAR},
+            #{role.modifyerId,jdbcType=BIGINT},
+            #{role.modifyTime,jdbcType=VARCHAR},
+            #{role.status,jdbcType=TINYINT},
+            #{role.display,jdbcType=TINYINT},
+
+            #{role.pid,jdbcType=BIGINT},
+            #{role.code,jdbcType=VARCHAR},
+            #{role.name,jdbcType=VARCHAR},
+            #{role.permissionLimit,jdbcType=INTEGER},
+            #{role.needRoleId,jdbcType=BIGINT},
+            #{role.description,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE ${baseTablePrefix}role
+        set REMARK           = #{remark,jdbcType=VARCHAR},
+            AUTHOR_ID        = #{authorId,jdbcType=BIGINT},
+            AUTHOR_TIME      = #{authorTime,jdbcType=VARCHAR},
+            MODIFYER_ID      = #{modifyerId,jdbcType=BIGINT},
+            MODIFY_TIME      = #{modifyTime,jdbcType=VARCHAR},
+            STATUS           = #{status,jdbcType=TINYINT},
+            DISPLAY          = #{display,jdbcType=TINYINT},
+            PID              = #{pid,jdbcType=BIGINT},
+            CODE             = #{code,jdbcType=VARCHAR},
+            NAME             = #{name,jdbcType=VARCHAR},
+            PERMISSION_LIMIT = #{permissionLimit,jdbcType=INTEGER},
+            NEED_ROLE_ID     = #{needRoleId,jdbcType=BIGINT},
+            DESCRIPTION      = #{description,jdbcType=VARCHAR}
+        where ID = #{id} AND ID != 0
+    </update>
+
+    <update id="delete">
+        UPDATE ${baseTablePrefix}role
+        SET DISPLAY = FALSE
+        WHERE ID = #{id} AND ID != 0
+    </update>
+
+    <delete id="deleteForever">
+        DELETE
+        FROM ${baseTablePrefix}role
+        WHERE ID = #{id} AND ID != 0
+    </delete>
+
+    <select id="getById" resultMap="roleResultMap">
+        SELECT *
+        FROM ${baseTablePrefix}role
+        WHERE DISPLAY = TRUE
+          AND ID = #{id} AND ID != 0
+    </select>
+
+    <select id="getMutexById" resultMap="roleResultMap">
+        SELECT A.*
+        FROM ${baseTablePrefix}role A
+        WHERE DISPLAY = TRUE
+          AND A.ID IN (SELECT ROLE_A FROM ${baseTablePrefix}role_mutex WHERE ROLE_B = #{id}
+                       UNION
+                       SELECT ROLE_B FROM ${baseTablePrefix}role_mutex WHERE ROLE_A = #{id})
+    </select>
+
+    <select id="getUserRoleList" resultMap="roleResultMap">
+        SELECT DISTINCT A.*
+        FROM (SELECT * FROM ${baseTablePrefix}user_role B WHERE B.USER_ID = #{userId}) C
+                 INNER JOIN ${baseTablePrefix}role A ON A.ID = C.ROLE_ID
+        WHERE A.DISPLAY = TRUE
+
+    </select>
+
+    <select id="getClosestChildren" resultMap="roleResultMap">
+        SELECT  A.*
+        FROM ${baseTablePrefix}role A
+        WHERE A.DISPLAY = TRUE AND A.PID = #{pid}
+
+    </select>
+</mapper>

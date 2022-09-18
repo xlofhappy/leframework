@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.le.base.rbac.unique">
+    <resultMap type="org.le.base.rbac.unique.service.po.UniqueEntity" id="uniqueResultMap">
+        <result property="unionId" column="UNION_ID"/>
+        <result property="uid" column="UID"/>
+        <result property="type" column="TYPE"/>
+    </resultMap>
+
+    <select id="list" parameterType="org.le.base.rbac.unique.service.impl.UniqueQueryImpl" resultMap="uniqueResultMap">
+        ${limitBefore}
+        SELECT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="org.le.base.rbac.unique.service.impl.UniqueQueryImpl" resultType="long">
+        SELECT COUNT(*)
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}unique A
+        <where>
+            <if test="unionId!=null and unionId!=''">
+                AND A.UNION_ID = #{unionId,jdbcType=VARCHAR}
+            </if>
+            <if test="uid!=null and uid!=''">
+                AND A.UID = #{uid,jdbcType=BIGINT}
+            </if>
+            <if test="type!=null">
+                AND A.TYPE = #{type}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="org.le.base.rbac.unique.service.po.UniqueEntity">
+        INSERT INTO ${baseTablePrefix}unique (UNION_ID, UID, TYPE)
+        VALUES (#{unionId,jdbcType=VARCHAR}, #{uid,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}unique (
+        UNION_ID,
+        UID,
+        TYPE
+        )
+        VALUES
+        <foreach collection="list" item="unique" index="index" separator=",">
+            (
+            #{unique.unionId,jdbcType=VARCHAR},
+            #{unique.uid,jdbcType=BIGINT},
+            #{unique.type,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM ${baseTablePrefix}unique
+        WHERE UNION_ID = #{unionId,jdbcType=VARCHAR}
+          AND TYPE = #{type}
+    </delete>
+
+    <delete id="deleteByUidAndType">
+        DELETE
+        FROM ${baseTablePrefix}unique
+        WHERE UID = #{uid,jdbcType=VARCHAR}
+          AND TYPE = #{type}
+    </delete>
+
+    <delete id="deleteByUid">
+        DELETE
+        FROM ${baseTablePrefix}unique
+        WHERE UID = #{uid}
+    </delete>
+
+    <select id="get" resultMap="uniqueResultMap">
+        SELECT *
+        FROM ${baseTablePrefix}unique
+        WHERE UNION_ID = #{unionId,jdbcType=VARCHAR}
+          AND TYPE = #{type}
+    </select>
+
+</mapper>
