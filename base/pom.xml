@@ -13,6 +13,7 @@
     <artifactId>base</artifactId>
     <version>${revision}</version>
     <name>Le Base - CMS Framework</name>
+    <url>https://github.com/xlofhappy/leframework/base</url>
     <description>Le Base CMS Framework, for quick build a web app, for Java</description>
     <packaging>jar</packaging>
 
@@ -66,20 +67,6 @@
         <finalName>le-base</finalName>
         <plugins>
             <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                 </configuration>
@@ -90,14 +77,17 @@
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <resources>

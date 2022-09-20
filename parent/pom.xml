@@ -11,6 +11,8 @@
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
     <name>Le Parent</name>
+    <url>https://github.com/xlofhappy/leframework/parent</url>
+    <description>LeFramework Parent Pom</description>
 
     <properties>
         <encoding>UTF-8</encoding>
@@ -27,6 +29,35 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${encoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:none</additionalJOption>
+                    </additionalJOptions>
                 </configuration>
             </plugin>
 

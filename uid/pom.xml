@@ -14,6 +14,8 @@
     <version>${revision}</version>
     <name>Le Uid Generator</name>
     <packaging>jar</packaging>
+    <url>https://github.com/xlofhappy/leframework/uid</url>
+    <description>LeFramework Global Id Generator</description>
 
     <dependencies>
         <dependency>
@@ -50,28 +52,6 @@
 
     <build>
         <finalName>le-uid-generator</finalName>
-        <plugins>
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

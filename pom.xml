@@ -16,6 +16,8 @@
     </modules>
     <packaging>pom</packaging>
     <name>Le Root</name>
+    <url>https://github.com/xlofhappy/leframework/base</url>
+    <description>LeFramework For CMS</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -47,15 +49,47 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>osprh</id>
-            <name>Open Source Project Repository Hosting</name>
+            <id>ossrh</id>
+            <name>Open Source Project Repository Hosting(Snapshots)</name>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>osprh</id>
-            <name>Open Source Project Repository Hosting</name>
+            <id>ossrh</id>
+            <name>Open Source Project Repository Hosting(Releases)</name>
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+    <build>
+        <finalName>le-base</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>gpg</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>

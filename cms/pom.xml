@@ -5,16 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.qweather.leframework</groupId>
-        <artifactId>dependencies</artifactId>
+        <artifactId>parent</artifactId>
         <version>${revision}</version>
-        <relativePath>../dependencies</relativePath>
+        <relativePath>../parent</relativePath>
     </parent>
 
     <artifactId>cms</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
     <name>Le CMS</name>
-    <description>Le CMS Maven App</description>
+    <url>https://github.com/xlofhappy/leframework/cms</url>
+    <description>LeFramework CMS Maven App</description>
 
     <dependencies>
         <dependency>
@@ -59,25 +60,6 @@
                 <version>${maven-deploy-plugin.version}</version>
                 <configuration>
                     <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>${maven-install-plugin.version}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
-                <configuration>
-                    <delimiters>
-                        <delimiter>@</delimiter>
-                    </delimiters>
-                    <encoding>UTF-8</encoding>
-                    <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
             </plugin>
             <plugin>

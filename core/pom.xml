@@ -13,6 +13,7 @@
     <artifactId>core</artifactId>
     <version>${revision}</version>
     <name>Le Core</name>
+    <url>https://github.com/xlofhappy/leframework/core</url>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -112,21 +113,6 @@
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
