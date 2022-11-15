@@ -1,15 +1,14 @@
 package com.qweather.leframework.base.rbac.user_extend.service.po;
 
 import com.qweather.leframework.base.rbac.user_extend.service.UserExtend;
-
-import java.io.Serializable;
+import com.qweather.leframework.model.BasePo;
 
 /**
  * Created at 2018-08-03 15:19:53
  *
  * @author xiaole
  */
-public class UserExtendEntity implements Serializable {
+public class UserExtendEntity extends BasePo {
 
     /**
      * 用户ID
@@ -26,6 +25,10 @@ public class UserExtendEntity implements Serializable {
 
     public UserExtendEntity() {
         super();
+    }
+
+    public UserExtendEntity(Long id) {
+        super(id);
     }
 
     public UserExtendEntity(Long uid, Integer k, String v) {

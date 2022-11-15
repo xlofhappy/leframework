@@ -1,15 +1,14 @@
 package com.qweather.leframework.base.rbac.unique.service.po;
 
 import com.qweather.leframework.base.rbac.unique.service.UniqueType;
-
-import java.io.Serializable;
+import com.qweather.leframework.model.BasePo;
 
 /**
  * Created at 2018-08-03 15:31:45
  *
  * @author xiaole
  */
-public class UniqueEntity implements Serializable {
+public class UniqueEntity extends BasePo {
 
     /**
      * User ID
@@ -24,6 +23,13 @@ public class UniqueEntity implements Serializable {
      * Union id with type
      */
     private String type;
+
+    public UniqueEntity() {
+    }
+
+    public UniqueEntity(Long id) {
+        super(id);
+    }
 
     public String getUnionId() {
         return unionId;

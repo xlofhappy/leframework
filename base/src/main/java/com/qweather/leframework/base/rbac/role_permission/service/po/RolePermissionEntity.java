@@ -1,13 +1,13 @@
 package com.qweather.leframework.base.rbac.role_permission.service.po;
 
-import java.io.Serializable;
+import com.qweather.leframework.model.BasePo;
 
 /**
  * Created at 2018-08-03 14:34:13
  *
  * @author xiaole
  */
-public class RolePermissionEntity implements Serializable {
+public class RolePermissionEntity extends BasePo {
 
     /**
      * 角色ID
@@ -19,6 +19,10 @@ public class RolePermissionEntity implements Serializable {
     private Long permissionId;
 
     public RolePermissionEntity() {
+    }
+
+    public RolePermissionEntity(Long id) {
+        super(id);
     }
 
     public RolePermissionEntity(Long roleId, Long permissionId) {

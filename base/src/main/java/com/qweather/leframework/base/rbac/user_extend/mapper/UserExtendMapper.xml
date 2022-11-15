@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qweather.leframework.base.rbac.user_extend">
-    <resultMap type="com.qweather.leframework.base.rbac.user_extend.service.po.UserExtendEntity" id="userExtendResultMap">
+    <resultMap type="com.qweather.leframework.base.rbac.user_extend.service.po.UserExtendEntity" extends="com.qweather.leframework.model.idMap" id="userExtendResultMap">
         <result property="uid" column="UID"/>
         <result property="k" column="K"/>
         <result property="v" column="V"/>

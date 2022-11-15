@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qweather.leframework.base.rbac.role_mutex">
-    <resultMap type="com.qweather.leframework.base.rbac.role_mutex.service.po.RoleMutexEntity" id="role_mutexResultMap">
+    <resultMap type="com.qweather.leframework.base.rbac.role_mutex.service.po.RoleMutexEntity" extends="com.qweather.leframework.model.idMap" id="role_mutexResultMap">
         <result property="roleA" column="ROLE_A"/>
         <result property="roleB" column="ROLE_B"/>
     </resultMap>

@@ -1,14 +1,14 @@
 package com.qweather.leframework.base.i18n.service.po;
 
 
-import java.io.Serializable;
+import com.qweather.leframework.model.BasePo;
 
 /**
  * Created at 2018-08-03 22:15:41
  *
  * @author xiaole
  */
-public class I18nEntity implements Serializable {
+public class I18nEntity extends BasePo {
 
     /**
      * i18n code, eg: site.menu
@@ -25,6 +25,10 @@ public class I18nEntity implements Serializable {
 
     public I18nEntity() {
         super();
+    }
+
+    public I18nEntity(Long id) {
+        super(id);
     }
 
     public String getCode() {

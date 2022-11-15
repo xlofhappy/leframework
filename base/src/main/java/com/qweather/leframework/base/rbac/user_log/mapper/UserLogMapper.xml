@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qweather.leframework.base.rbac.user_log">
+    <resultMap type="com.qweather.leframework.base.rbac.user_log.service.po.UserLogEntity" extends="com.qweather.leframework.model.baseMap" id="userLogResultMap">
+        <result property="userId" column="USER_ID"/>   
+        <result property="email" column="EMAIL"/>
+        <result property="type" column="TYPE"/>
+        <result property="content" column="CONTENT"/>   
+    </resultMap>
+
+    <select id="list" parameterType="com.qweather.leframework.base.rbac.user_log.service.impl.UserLogQueryImpl" resultMap="userLogResultMap">
+        ${limitBefore}
+        SELECT A.* ${limitBetween}
+        <include refid="query"/>
+        ${orderBy}
+        ${limitAfter}
+    </select>
+
+    <select id="count" parameterType="com.qweather.leframework.base.rbac.user_log.service.impl.UserLogQueryImpl" resultType="long">
+        SELECT COUNT(*)
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        FROM ${baseTablePrefix}user_log A
+        <where>
+            A.DISPLAY = TRUE
+            <if test="id!=null">
+                AND A.ID = #{id}
+            </if>
+            <if test="userId!=null">
+                AND A.USER_ID = #{userId}
+            </if>
+            <if test="email!=null and email!=''">
+                AND A.EMAIL = #{email}
+            </if>
+            <if test="type!=null and type!=''">
+                AND A.TYPE = #{type}
+            </if>
+            <if test="content!=null and content!=''">
+                AND A.CONTENT = #{content}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="com.qweather.leframework.base.rbac.user_log.service.po.UserLogEntity">
+        INSERT INTO ${baseTablePrefix}user_log (
+            ID,
+            REMARK,
+            AUTHOR_ID,
+            AUTHOR_TIME,
+            MODIFYER_ID,
+            MODIFY_TIME,
+            STATUS,
+            DISPLAY,
+
+            USER_ID,
+            EMAIL,
+            TYPE,
+            CONTENT
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{remark,jdbcType=VARCHAR},
+            #{authorId,jdbcType=BIGINT},
+            #{authorTime,jdbcType=VARCHAR},
+            #{modifyerId,jdbcType=BIGINT},
+            #{modifyTime,jdbcType=VARCHAR},
+            #{status,jdbcType=TINYINT},
+            #{display,jdbcType=TINYINT},
+
+            #{userId},
+            #{email},
+            #{type},
+            #{content}
+        )
+    </insert>
+
+
+    <insert id="multiInsert" parameterType="java.util.List">
+        INSERT INTO ${baseTablePrefix}user_log (
+            ID,
+            REMARK,
+            AUTHOR_ID,
+            AUTHOR_TIME,
+            MODIFYER_ID,
+            MODIFY_TIME,
+            STATUS,
+            DISPLAY,
+
+            USER_ID,
+            EMAIL,
+            TYPE,
+            CONTENT
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.id,jdbcType=BIGINT},
+            #{item.remark,jdbcType=VARCHAR},
+            #{item.authorId,jdbcType=BIGINT},
+            #{item.authorTime,jdbcType=VARCHAR},
+            #{item.modifyerId,jdbcType=BIGINT},
+            #{item.modifyTime,jdbcType=VARCHAR},
+            #{item.status,jdbcType=TINYINT},
+            #{item.display,jdbcType=TINYINT},
+
+            #{item.userId},
+            #{item.email},
+            #{item.type},
+            #{item.content}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE ${baseTablePrefix}user_log SET
+
+        REMARK = #{remark,jdbcType=VARCHAR},
+        AUTHOR_ID = #{authorId,jdbcType=BIGINT},
+        AUTHOR_TIME = #{authorTime,jdbcType=VARCHAR},
+        MODIFYER_ID = #{modifyerId,jdbcType=BIGINT},
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+        STATUS = #{status,jdbcType=TINYINT},
+        DISPLAY = #{display,jdbcType=TINYINT},
+
+        USER_ID = #{userId},
+        EMAIL = #{email},
+        TYPE = #{type},
+        CONTENT = #{content}
+        WHERE ID = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE ${baseTablePrefix}user_log
+        SET DISPLAY = FALSE
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteForever">
+        DELETE FROM ${baseTablePrefix}user_log
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteByUserId">
+        DELETE FROM ${baseTablePrefix}user_log
+        WHERE USER_ID = #{userId}
+    </delete>
+
+</mapper>

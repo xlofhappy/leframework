@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qweather.leframework.base.rbac.unique">
-    <resultMap type="com.qweather.leframework.base.rbac.unique.service.po.UniqueEntity" id="uniqueResultMap">
+    <resultMap type="com.qweather.leframework.base.rbac.unique.service.po.UniqueEntity" extends="com.qweather.leframework.model.idMap" id="uniqueResultMap">
         <result property="unionId" column="UNION_ID"/>
         <result property="uid" column="UID"/>
         <result property="type" column="TYPE"/>
