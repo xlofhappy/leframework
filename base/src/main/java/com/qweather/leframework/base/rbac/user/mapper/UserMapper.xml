@@ -48,6 +48,15 @@
             <if test="idNotEquals!=null">
                 AND A.ID != #{idNotEquals}
             </if>
+            <if test="idGreaterOrEqual!=null">
+                AND A.ID &gt;= #{idGreaterOrEqual}
+            </if>
+            <if test="idIn!=null and idIn.length > 0">
+                AND A.ID IN
+                <foreach collection="idIn" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
             <if test="username!=null and username!=''">
                 AND A.USERNAME = #{username}
             </if>
@@ -96,7 +105,7 @@
                     AND B.TYPE = #{type}
                 </if>
             </if>
-            <if test="roleId!=null and roleId !=''">
+            <if test="roleId!=null">
                 AND C.ROLE_ID = #{roleId}
             </if>
             <if test="inRoles!=null and inRoles.length > 0">

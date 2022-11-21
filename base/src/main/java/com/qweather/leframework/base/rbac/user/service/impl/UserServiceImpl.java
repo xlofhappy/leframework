@@ -164,7 +164,7 @@ public class UserServiceImpl implements UserService {
                     if (newUser) {
                         newEntity = true;
                     } else {
-                        throw new RuntimeException("user " + old.getId() + " not exists, new-user must be false");
+                        throw new RuntimeException("user not exists, new-user must be true");
                     }
                 }
             } else {

@@ -11,6 +11,10 @@ import com.qweather.leframework.model.BaseQuery;
  */
 public interface UserQuery extends BaseQuery<UserQuery, UserEntity> {
 
+    UserQuery idIn(Long... ids);
+
+    UserQuery idGreaterOrEqual(Long id);
+
     UserQuery unionId(String unionId, UniqueType type);
 
     UserQuery unionIdLike(String unionIdLike, UniqueType type);

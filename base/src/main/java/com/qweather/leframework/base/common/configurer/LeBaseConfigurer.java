@@ -44,12 +44,26 @@ public class LeBaseConfigurer {
         return new LeAdminPathInterceptor(permissionService);
     }
 
+    /**
+     * 兼容Spring Message Auto Configuration
+     * {@link org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration}
+     *
+     * @author xiaole
+     * @date 2022-03-28T19:07:26+08:00
+     */
     @Bean
     @ConfigurationProperties(prefix = "spring.messages")
     public MessageSourceProperties messageSourceProperties() {
         return new MessageSourceProperties();
     }
 
+    /**
+     * 自定义 messageSource
+     * leMessageSource = Spring Message Source + Database i18n
+     *
+     * @author xiaole
+     * @date 2022-03-28T19:18:08+08:00
+     */
     @Bean
     public MessageSource messageSource(I18nService i18nService, MessageSourceProperties properties) {
         return new LeMessageSource(i18nService, properties);

@@ -39,8 +39,10 @@ public class UserQueryImpl extends AbstractQuery<UserQuery, UserEntity> implemen
     private String email;
     private Short status;
     private String emailLike;
+    private Long[] idIn;
     private Long[] inRoles;
     private Long idNotEquals;
+    private Long idGreaterOrEqual;
     private CommandExecutor commandExecutor;
 
     public UserQueryImpl(CommandExecutor commandExecutor) {
@@ -66,6 +68,24 @@ public class UserQueryImpl extends AbstractQuery<UserQuery, UserEntity> implemen
     @Override
     public UserQuery id(Long id) {
         this.id = id;
+        return this;
+    }
+
+    @Override
+    public UserQuery idIn(Long... ids) {
+        this.idIn = ids;
+        return this;
+    }
+
+    @Override
+    public UserQuery idNotEquals(Long id) {
+        this.idNotEquals = id;
+        return this;
+    }
+
+    @Override
+    public UserQuery idGreaterOrEqual(Long id) {
+        this.idGreaterOrEqual = id;
         return this;
     }
 
@@ -170,12 +190,6 @@ public class UserQueryImpl extends AbstractQuery<UserQuery, UserEntity> implemen
     @Override
     public UserQuery username(String username) {
         this.username = username;
-        return this;
-    }
-
-    @Override
-    public UserQuery idNotEquals(Long id) {
-        this.idNotEquals = id;
         return this;
     }
 

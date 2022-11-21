@@ -4,6 +4,7 @@ import com.qweather.leframework.base.common.util.BaseConstant;
 import com.qweather.leframework.base.rbac.permission.service.po.PermissionEntity;
 import com.qweather.leframework.base.rbac.user.service.po.UserEntity;
 import com.qweather.leframework.core.properties.LePropertyPath;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.PathMatcher;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +21,7 @@ import java.util.List;
  *
  * @author xiaole
  */
-public class LeAuthInterceptor implements HandlerInterceptor {
+public class LeAuthInterceptor implements HandlerInterceptor, InitializingBean {
 
     private List<String> free;
     private List<String> login;
@@ -76,8 +77,8 @@ public class LeAuthInterceptor implements HandlerInterceptor {
                                 Exception ex) {
     }
 
-    @PostConstruct
-    public void init() {
+    @Override
+    public void afterPropertiesSet() throws Exception {
         if (lePropertyPath != null) {
             this.login = lePropertyPath.getLogin();
             this.errorCode = lePropertyPath.getErrorCode();
@@ -85,6 +86,4 @@ public class LeAuthInterceptor implements HandlerInterceptor {
             this.redirectKey = lePropertyPath.getRedirectKey();
         }
     }
-
-
 }

@@ -20,10 +20,11 @@ public class Notifier {
     private int[] timeBlock = new int[]{2 * 1000, 5 * 1000, 10 * 1000};
 
     private final Semaphore semaphore;
-    private final int total;
+    private final int TOTAL;
+    private final int MAX = Runtime.getRuntime().availableProcessors() * 25;
 
     public static Notifier one() {
-        return new Notifier(Integer.MAX_VALUE);
+        return new Notifier(ThreadExecutor.getExecutor().getCorePoolSize());
     }
 
     public static Notifier one(int concurrentNumber) {
@@ -70,41 +71,38 @@ public class Notifier {
     }
 
     public void await() {
-        int i = semaphore.availablePermits();
-        while (i < total) {
+        while (semaphore.availablePermits() != TOTAL) {
             try {
                 Thread.sleep(1000);
-                i = semaphore.availablePermits();
             } catch (Exception ignored) {
             }
         }
     }
 
     private Notifier(int n) {
-        if (n < 0) {
-            semaphore = new Semaphore(1);
-            total = 1;
-        } else {
-            semaphore = new Semaphore(n);
-            total = n;
-            int corePoolSize = ThreadExecutor.getExecutor().getCorePoolSize();
-            if (n > corePoolSize) {
-                ThreadExecutor.getExecutor().setCorePoolSize(n);
-            }
-        }
+        this(n, null);
     }
 
     private Notifier(int n, int[] timeBlocks) {
         if (n < 0) {
             semaphore = new Semaphore(1);
-            total = 1;
-        } else {
+            TOTAL = 1;
+        } else if (n <= MAX) {
             semaphore = new Semaphore(n);
-            total = n;
+            TOTAL = n;
             int corePoolSize = ThreadExecutor.getExecutor().getCorePoolSize();
             if (n > corePoolSize) {
                 ThreadExecutor.getExecutor().setCorePoolSize(n);
             }
+            int maximumPoolSize = ThreadExecutor.getExecutor().getMaximumPoolSize();
+            if (n > maximumPoolSize) {
+                ThreadExecutor.getExecutor().setMaximumPoolSize(n);
+            }
+        } else {
+            TOTAL = MAX;
+            semaphore = new Semaphore(MAX);
+            ThreadExecutor.getExecutor().setCorePoolSize(MAX);
+            ThreadExecutor.getExecutor().setMaximumPoolSize(MAX);
         }
 
         if (timeBlocks != null) {
@@ -116,5 +114,4 @@ public class Notifier {
             timeBlock = timeBlocks;
         }
     }
-
 }

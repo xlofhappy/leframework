@@ -129,6 +129,61 @@ public class HttpUtil {
         return httputil.execute().getString();
     }
 
+    public static HttpUtil headHttp(String url, Multimap<String, String> paramMap, Map<String, String> headerMap) {
+        HttpUtil httpUtil = newInstance();
+        URIBuilder uriBuilder = new URIBuilder(URI.create(url));
+        uriBuilder.setCharset(StandardCharsets.UTF_8);
+        if (paramMap != null) {
+            List<NameValuePair> pairs = convertParameters(paramMap);
+            uriBuilder.setParameters(pairs);
+        }
+        HttpHead request = new HttpHead(uriBuilder.toString());
+        if (headerMap != null && headerMap.size() > 0) {
+            for (Map.Entry<String, String> param : headerMap.entrySet()) {
+                request.addHeader(param.getKey(), param.getValue());
+            }
+        }
+
+        httpUtil.request = request;
+        return httpUtil;
+    }
+
+    public static Map<String, Header> head(String url) throws IOException {
+        HttpUtil http = headHttp(url, null, null);
+        ResponseWrap execute = http.execute();
+        Header[] allHeaders = execute.getAllHeaders();
+        execute.close();
+        Map<String, Header> map = new HashMap<>(allHeaders.length);
+        for (Header header : allHeaders) {
+            map.put(header.getName(), header);
+        }
+        return map;
+    }
+
+    public static Map<String, Header> head(String url, Multimap<String, String> paramMap) throws IOException {
+        HttpUtil http = headHttp(url, paramMap, null);
+        ResponseWrap execute = http.execute();
+        Header[] allHeaders = execute.getAllHeaders();
+        execute.close();
+        Map<String, Header> map = new HashMap<>(allHeaders.length);
+        for (Header header : allHeaders) {
+            map.put(header.getName(), header);
+        }
+        return map;
+    }
+
+    public static Map<String, Header> head(String url, Multimap<String, String> paramMap, Map<String, String> headerMap) throws IOException {
+        HttpUtil http = headHttp(url, paramMap, headerMap);
+        ResponseWrap execute = http.execute();
+        Header[] allHeaders = execute.getAllHeaders();
+        execute.close();
+        Map<String, Header> map = new HashMap<>(allHeaders.length);
+        for (Header header : allHeaders) {
+            map.put(header.getName(), header);
+        }
+        return map;
+    }
+
     public static HttpUtil postHttp(String url, Multimap<String, String> paramMap, Map<String, File> fileMap,
                                     Map<String, String> headerMap) {
         HttpUtil httpUtil = newInstance();

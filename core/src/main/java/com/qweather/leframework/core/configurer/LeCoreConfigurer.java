@@ -1,5 +1,6 @@
 package com.qweather.leframework.core.configurer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qweather.leframework.core.factory.RedisInstanceFactory;
 import com.qweather.leframework.core.interceptors.LeBaseInterceptor;
 import com.qweather.leframework.core.properties.LeProperties;
@@ -21,6 +22,7 @@ import org.springframework.context.annotation.Bean;
 public class LeCoreConfigurer {
 
     @Bean
+    @ConditionalOnProperty(prefix = "le.http", name = "session-id")
     @ConditionalOnClass({ServerProperties.class, LeProperties.class})
     public LeBaseInterceptor leBaseInterceptor(ServerProperties serverProperties, LeProperties leProperties) {
         return new LeBaseInterceptor(serverProperties, leProperties);
@@ -32,5 +34,4 @@ public class LeCoreConfigurer {
     public RedisInstanceFactory redisInstanceFactory(LeProperties leProperties) {
         return new RedisInstanceFactory(leProperties.getRedis());
     }
-
 }
